@@ -1,0 +1,29 @@
+Hello!
+
+Thank you for downloading this 3D model. Before you proceed with rendering, here is a guide for applying the textures:
+
+You will find TWO textures inside the "Textures" folder for the 3D model:
+
+1. "Double-arm street light pole" 4K Texture 
+2. "Single-arm street light pole" 4K Texture
+
+Inside each, you may find SIX different texture maps:
+
+- BaseColor = Diffuse map
+- Metalness = Metallic
+- Roughness
+- Normal = Bump map
+- Transmission
+- Emissive = Emission
+
+**If the textures aren’t added automatically, here’s how to apply them manually:**
+
+Apply the "Double-arm street light pole" texture to the following object:
+- "Double_arm"
+
+Apply the "Single-arm street light pole" texture to the following object:
+- Road part of "Single_arm"
+
+Thank you once again for downloading. I hope this model meets your needs and expectations. 
+
+If you have any questions or need further assistance, please don't hesitate to contact me.

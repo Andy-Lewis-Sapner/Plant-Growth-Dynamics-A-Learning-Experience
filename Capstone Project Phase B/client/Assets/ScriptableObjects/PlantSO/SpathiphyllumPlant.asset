@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc4bf5d2361b014db182b5d89699ff5, type: 3}
+  m_Name: SpathiphyllumPlant
+  m_EditorClassIdentifier: 
+  plantName: Spathiphyllum
+  plantPrefab: {fileID: 311562030033154202, guid: 6c2980eb7cb9f594980208ed6fbf5ebd, type: 3}
+  plantSprite: {fileID: -1786542884, guid: 51c76e84a7740244fb2e3fd81e02817e, type: 3}
+  briefDescription: The Peace Lily is a tropical plant known for its elegant white
+    flowers and glossy, green leaves. Native to Central and South America, it thrives
+    in partial light and moist, well-drained soil. It's toxic to pets and people,
+    so be careful where you place it.
+  growingRecommendations:
+  - 'Light: Prefers indirect light, especially from an east-facing window. Avoid
+    direct sunlight.'
+  - "Water: Water when the top 2.5 cm of soil dries out. It\u2019s better to underwater
+    than overwater. Use distilled water if possible."
+  - "Temperature: Best in temperatures between 18\xB0C and 27\xB0C. Avoid cold drafts
+    and temperatures below 13\xB0C."
+  - 'Humidity: Prefers high humidity. Mist the leaves weekly or keep it in a humid
+    area.'
+  - 'Fertilizer: Feed weekly during spring and summer with a diluted 20-20-20 fertilizer.
+    No need to fertilize in winter.'
+  optimalMoistureLevel: 60
+  moistureToleranceRange: 20
+  preferredFertilizerType: 1
+  fertilizerGrowthBoost: 1.5
+  nutrientDepletionRate: 0.1
+  defaultMinimalTemperature: 18
+  defaultMaximalTemperature: 27
+  defaultMinimalHumidity: 40
+  defaultMaximalHumidity: 60
+  defaultMinimalLight: 200
+  defaultMaximalLight: 1000
+  temperatureWeight: 0.15
+  humidityWeight: 0.3
+  lightWeight: 0.2
+  waterWeight: 0.35
+  groundDetails:
+    environment: 0
+    maxScale: {x: 1.5, y: 1.5, z: 1.5}
+    minimalTemperature: 15
+    maximalTemperature: 32
+    minimalHumidity: 40
+    maximalHumidity: 90
+    minimalLight: 50
+    maximalLight: 600
+  houseDetails:
+    environment: 1
+    maxScale: {x: 0.3, y: 0.3, z: 0.3}
+    minimalTemperature: 18
+    maximalTemperature: 27
+    minimalHumidity: 50
+    maximalHumidity: 80
+    minimalLight: 50
+    maximalLight: 500
+  greenHouseDetails:
+    environment: 2
+    maxScale: {x: 0.5, y: 0.5, z: 0.5}
+    minimalTemperature: 18
+    maximalTemperature: 30
+    minimalHumidity: 55
+    maximalHumidity: 85
+    minimalLight: 100
+    maximalLight: 600

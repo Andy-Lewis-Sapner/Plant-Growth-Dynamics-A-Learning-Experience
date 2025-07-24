@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc4bf5d2361b014db182b5d89699ff5, type: 3}
+  m_Name: ElephantEarPlant
+  m_EditorClassIdentifier: 
+  plantName: Elephant Ear
+  plantPrefab: {fileID: 166214357473015091, guid: 25b4e3e5256f5f0438900891b9c39175, type: 3}
+  plantSprite: {fileID: -1233901724, guid: cbf99424f543f2f47b44a630e0da7472, type: 3}
+  briefDescription: Elephant ears are tropical perennials prized for their large,
+    lush leaves, which create a bold, dramatic effect in gardens and homes. They
+    belong to the Colocasia, Alocasia, and Xanthosoma genera and thrive in warm,
+    humid environments. These fast-growing plants reach maturity within a single
+    season and can be grown indoors or outdoors in the right conditions. However,
+    they are toxic to humans and pets if ingested.
+  growingRecommendations:
+  - 'Watering: Keep the soil consistently moist but not soggy. Elephant ears thrive
+    in wet conditions and can even tolerate shallow standing water. If grown in containers,
+    they may need daily watering.'
+  - "Temperature: Maintain temperatures of at least 70\xB0F (21\xB0C) during the
+    day and 60\xB0F (16\xB0C) at night. These plants are sensitive to cold and will
+    not survive frost."
+  - 'Humidity: High humidity is essential for elephant ears. If grown indoors, mist
+    the leaves regularly or use a humidifier to maintain moisture levels.'
+  - 'Fertilizer: Apply a high-nitrogen, water-soluble fertilizer every two to three
+    weeks during the growing season to support their large foliage.'
+  - 'Light: While they tolerate full sun, elephant ears prefer partial shade or dappled
+    light, especially varieties with green leaves. Dark-leaved varieties require
+    more sunlight to maintain their color.'
+  optimalMoistureLevel: 70
+  moistureToleranceRange: 20
+  preferredFertilizerType: 0
+  fertilizerGrowthBoost: 1.8
+  nutrientDepletionRate: 0.15
+  defaultMinimalTemperature: 16
+  defaultMaximalTemperature: 27
+  defaultMinimalHumidity: 50
+  defaultMaximalHumidity: 70
+  defaultMinimalLight: 400
+  defaultMaximalLight: 800
+  temperatureWeight: 0.35
+  humidityWeight: 0.3
+  lightWeight: 0.25
+  waterWeight: 0.1
+  groundDetails:
+    environment: 0
+    maxScale: {x: 25, y: 25, z: 25}
+    minimalTemperature: 15
+    maximalTemperature: 30
+    minimalHumidity: 40
+    maximalHumidity: 90
+    minimalLight: 200
+    maximalLight: 1500
+  houseDetails:
+    environment: 1
+    maxScale: {x: 2, y: 2, z: 2}
+    minimalTemperature: 18
+    maximalTemperature: 26
+    minimalHumidity: 50
+    maximalHumidity: 70
+    minimalLight: 300
+    maximalLight: 800
+  greenHouseDetails:
+    environment: 2
+    maxScale: {x: 8, y: 8, z: 8}
+    minimalTemperature: 20
+    maximalTemperature: 32
+    minimalHumidity: 60
+    maximalHumidity: 90
+    minimalLight: 400
+    maximalLight: 1600

@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: a10a729778c596047885712a0bdc11b8
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258290
+  packageName: Super Behaviour
+  packageVersion: 0.1.2
+  assetPath: Assets/Plugins/LoM/Super/Editor/Settings/SuperBehaviourPreferenceProvider.cs
+  uploadId: 729048

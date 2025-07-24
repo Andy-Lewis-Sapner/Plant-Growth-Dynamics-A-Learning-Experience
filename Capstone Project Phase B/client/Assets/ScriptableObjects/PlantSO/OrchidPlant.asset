@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc4bf5d2361b014db182b5d89699ff5, type: 3}
+  m_Name: OrchidPlant
+  m_EditorClassIdentifier: 
+  plantName: Orchid
+  plantPrefab: {fileID: 1776824924862781464, guid: c90898dfbab1dec41a164858c6c023ba, type: 3}
+  plantSprite: {fileID: -502250361, guid: 939f9bb79b1913a46b8a1b95539ae045, type: 3}
+  briefDescription: Orchids (Orchidaceae) are beautiful, perennial plants known for
+    their colorful blooms. Common species like Phalaenopsis, Cattleya, and Dendrobium
+    grow from 30 cm to 1 meter tall, with flowers in various colors, thriving in
+    partial shade.
+  growingRecommendations:
+  - 'Light: Provide bright, indirect light, ideally from a south- or east-facing
+    window.'
+  - 'Watering: Water once the soil is dry, about twice a week in warmer months and
+    once a week in cooler months.'
+  - "Temperature: Keep temperatures between 10\xB0C and 32\xB0C (50\xB0F to 90\xB0F)
+    and avoid drafts."
+  - 'Humidity: Maintain humidity between 40% and 70%. Consider using a humidity tray.'
+  - 'Fertilizer: Feed with diluted orchid fertilizer every two weeks during the growing
+    season. Skip in winter.'
+  optimalMoistureLevel: 50
+  moistureToleranceRange: 20
+  preferredFertilizerType: 2
+  fertilizerGrowthBoost: 1.3
+  nutrientDepletionRate: 0.08
+  defaultMinimalTemperature: 10
+  defaultMaximalTemperature: 32
+  defaultMinimalHumidity: 40
+  defaultMaximalHumidity: 70
+  defaultMinimalLight: 400
+  defaultMaximalLight: 800
+  temperatureWeight: 0.15
+  humidityWeight: 0.3
+  lightWeight: 0.35
+  waterWeight: 0.2
+  groundDetails:
+    environment: 0
+    maxScale: {x: 0.85, y: 0.85, z: 0.85}
+    minimalTemperature: 18
+    maximalTemperature: 30
+    minimalHumidity: 40
+    maximalHumidity: 80
+    minimalLight: 300
+    maximalLight: 1200
+  houseDetails:
+    environment: 1
+    maxScale: {x: 0.3, y: 0.3, z: 0.3}
+    minimalTemperature: 20
+    maximalTemperature: 27
+    minimalHumidity: 50
+    maximalHumidity: 70
+    minimalLight: 200
+    maximalLight: 800
+  greenHouseDetails:
+    environment: 2
+    maxScale: {x: 0.3, y: 0.3, z: 0.3}
+    minimalTemperature: 19
+    maximalTemperature: 29
+    minimalHumidity: 55
+    maximalHumidity: 80
+    minimalLight: 400
+    maximalLight: 1400

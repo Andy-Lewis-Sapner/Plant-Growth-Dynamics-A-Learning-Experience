@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc4bf5d2361b014db182b5d89699ff5, type: 3}
+  m_Name: MonsteraPlant
+  m_EditorClassIdentifier: 
+  plantName: Monstera
+  plantPrefab: {fileID: 4975336753417282658, guid: 85f2007d7e6196c4692fed1b11349f3c, type: 3}
+  plantSprite: {fileID: -1039720795, guid: 60c8f2f10e5179243a006bf55537bea7, type: 3}
+  briefDescription: Monstera deliciosa, also known as the Swiss cheese plant, is
+    a fast-growing tropical vine native to Central America. It is admired for its
+    large, glossy, split leaves (fenestrations) and ability to thrive indoors. This
+    plant can grow 3 to 15 feet (0.9 to 4.5 meters) tall and 3 to 8 feet (0.9 to
+    2.4 meters) wide when mature. Though easy to care for, it is toxic to humans
+    and pets if ingested.
+  growingRecommendations:
+  - "Light: Prefers bright, indirect light (65\xB0F to 75\xB0F / 18\xB0C to 24\xB0C).
+    Direct sunlight can scorch leaves; too little light can prevent fenestrations
+    from developing. Can tolerate full shade outdoors, growing well in dappled sunlight."
+  - "Watering: Water when the top 2 inches (5 cm) of soil are dry. Slowly water until
+    it drains out of the pot\u2019s drainage holes. Reduce watering frequency in
+    winter. Limp or curling leaves indicate underwatering."
+  - "Temperature & Humidity: Thrives in temperatures between 65\xB0F and 85\xB0F
+    (18\xB0C to 29\xB0C). Can tolerate temperatures as low as 50\xB0F (10\xB0C) but
+    stops growing in extreme cold or heat. Prefers humidity around 60%\u2014increase
+    humidity using a humidifier or pebble tray."
+  - 'Soil: Requires well-draining, peat-based soil with good aeration. Ideal mix:
+    3 parts indoor potting soil, 2 parts shredded bark, 1 part perlite. Prefers acidic
+    to neutral soil (pH 5.5 to 7.0).'
+  - 'Fertilizer: Feed with a balanced liquid fertilizer (1-1-1 or 3-1-2 ratio) every
+    2-4 weeks during the growing season. Reduce fertilization in fall and winter.'
+  optimalMoistureLevel: 60
+  moistureToleranceRange: 20
+  preferredFertilizerType: 1
+  fertilizerGrowthBoost: 1.5
+  nutrientDepletionRate: 0.1
+  defaultMinimalTemperature: 18
+  defaultMaximalTemperature: 29
+  defaultMinimalHumidity: 60
+  defaultMaximalHumidity: 80
+  defaultMinimalLight: 200
+  defaultMaximalLight: 1000
+  temperatureWeight: 0.35
+  humidityWeight: 0.3
+  lightWeight: 0.2
+  waterWeight: 0.15
+  groundDetails:
+    environment: 0
+    maxScale: {x: 1.5, y: 1.5, z: 1.5}
+    minimalTemperature: 18
+    maximalTemperature: 32
+    minimalHumidity: 60
+    maximalHumidity: 90
+    minimalLight: 300
+    maximalLight: 1200
+  houseDetails:
+    environment: 1
+    maxScale: {x: 0.3, y: 0.3, z: 0.3}
+    minimalTemperature: 18
+    maximalTemperature: 29
+    minimalHumidity: 50
+    maximalHumidity: 70
+    minimalLight: 200
+    maximalLight: 800
+  greenHouseDetails:
+    environment: 2
+    maxScale: {x: 0.6, y: 0.6, z: 0.6}
+    minimalTemperature: 20
+    maximalTemperature: 30
+    minimalHumidity: 70
+    maximalHumidity: 90
+    minimalLight: 250
+    maximalLight: 1000

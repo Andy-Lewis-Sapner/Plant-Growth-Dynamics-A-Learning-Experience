@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc4bf5d2361b014db182b5d89699ff5, type: 3}
+  m_Name: FicusLyrataPlant
+  m_EditorClassIdentifier: 
+  plantName: Ficus Lyrata
+  plantPrefab: {fileID: 5562354741467067803, guid: ab11e059dd1fb3d4a96c0057a68984f2, type: 3}
+  plantSprite: {fileID: -1454716482, guid: f5d09bfe5c2fbab449d13a8f4793bca6, type: 3}
+  briefDescription: The fiddle leaf fig is a broadleaf evergreen known for its large,
+    glossy, violin-shaped leaves. Despite its reputation for being somewhat finicky,
+    it is a popular indoor plant due to its striking appearance and adaptability
+    to household conditions. This plant can grow to an impressive height of 6 to
+    10 feet (1.8 to 3 meters) indoors and up to 50 feet (15 meters) outdoors in its
+    native habitat. However, it is toxic to humans and pets if ingested.
+  growingRecommendations:
+  - 'Light: Requires bright, indirect light for about six hours daily. Avoid direct
+    afternoon sun, which can scorch its leaves.'
+  - 'Watering: Water when the top inch (2.5 cm) of soil is dry. Overwatering can
+    cause root rot, while underwatering leads to wilting. To prevent salt buildup,
+    flush the soil with water monthly.'
+  - "Temperature & Humidity: Prefers stable temperatures between 60\xB0F and 85\xB0F
+    (16\xB0C to 29\xB0C). Keep humidity between 30-65%. If your home is dry, use
+    a humidifier or mist occasionally. Avoid placing it near drafts or air conditioning
+    vents."
+  - 'Soil: Use a well-draining, loamy soil mix. A peat-based soil combined with perlite
+    or a 50/50 mix of cactus and houseplant soil works well.'
+  - 'Fertilizer: Feed monthly during the growing season with a high-nitrogen fertilizer
+    (NPK 16-5-11) to support healthy leaf growth. Liquid or slow-release fertilizers
+    work well.'
+  optimalMoistureLevel: 60
+  moistureToleranceRange: 20
+  preferredFertilizerType: 1
+  fertilizerGrowthBoost: 1.5
+  nutrientDepletionRate: 0.1
+  defaultMinimalTemperature: 16
+  defaultMaximalTemperature: 29
+  defaultMinimalHumidity: 30
+  defaultMaximalHumidity: 65
+  defaultMinimalLight: 400
+  defaultMaximalLight: 1000
+  temperatureWeight: 0.2
+  humidityWeight: 0.3
+  lightWeight: 0.3
+  waterWeight: 0.2
+  groundDetails:
+    environment: 0
+    maxScale: {x: 1.5, y: 1.5, z: 1.5}
+    minimalTemperature: 15
+    maximalTemperature: 32
+    minimalHumidity: 40
+    maximalHumidity: 90
+    minimalLight: 300
+    maximalLight: 1200
+  houseDetails:
+    environment: 1
+    maxScale: {x: 0.3, y: 0.3, z: 0.3}
+    minimalTemperature: 18
+    maximalTemperature: 27
+    minimalHumidity: 40
+    maximalHumidity: 70
+    minimalLight: 400
+    maximalLight: 800
+  greenHouseDetails:
+    environment: 2
+    maxScale: {x: 0.6, y: 0.6, z: 0.6}
+    minimalTemperature: 18
+    maximalTemperature: 30
+    minimalHumidity: 50
+    maximalHumidity: 85
+    minimalLight: 400
+    maximalLight: 1000

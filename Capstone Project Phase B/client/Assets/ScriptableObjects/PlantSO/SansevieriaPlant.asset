@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc4bf5d2361b014db182b5d89699ff5, type: 3}
+  m_Name: SansevieriaPlant
+  m_EditorClassIdentifier: 
+  plantName: Sansevieria
+  plantPrefab: {fileID: 5352066403235845636, guid: af6675e1cdbbd774588c211e4b6bf411, type: 3}
+  plantSprite: {fileID: 834425624, guid: c4bc7d16c973b9b4e803ad9281d11740, type: 3}
+  briefDescription: "Snake plants (Dracaena trifasciata), also known as mother-in-law\u2019s
+    tongue, are resilient evergreen perennials with sword-like leaves in green, yellow,
+    and cream patterns. They are popular for their ability to thrive in low light
+    and go without water for weeks, making them perfect for beginners. Typically
+    growing to 0.6\u20131.5 meters tall, snake plants can bloom white, tubular flowers
+    in spring."
+  growingRecommendations:
+  - "Light: Place in bright, indirect light for 8\u201310 hours a day. Can tolerate
+    low light but will grow best with some direct sunlight."
+  - "Watering: Water when the soil is completely dry. In the warmer months, water
+    every 2\u20133 weeks; in winter, water once a month. Overwatering can cause root
+    rot."
+  - "Humidity: Prefers average humidity levels (30%\u201350%), typical for indoor
+    environments."
+  - 'Fertilizer: Feed once in spring and once in mid-summer with diluted balanced
+    fertilizer. Avoid fertilizing in winter.'
+  - "Temperature: Keep between 21\xB0C and 32\xB0C (70\xB0F to 90\xB0F). Protect
+    from temperatures below 10\xB0C (50\xB0F) to avoid damage."
+  optimalMoistureLevel: 20
+  moistureToleranceRange: 20
+  preferredFertilizerType: 1
+  fertilizerGrowthBoost: 1.2
+  nutrientDepletionRate: 0.06
+  defaultMinimalTemperature: 21
+  defaultMaximalTemperature: 32
+  defaultMinimalHumidity: 30
+  defaultMaximalHumidity: 50
+  defaultMinimalLight: 200
+  defaultMaximalLight: 1000
+  temperatureWeight: 0.2
+  humidityWeight: 0.1
+  lightWeight: 0.3
+  waterWeight: 0.4
+  groundDetails:
+    environment: 0
+    maxScale: {x: 0.75, y: 0.75, z: 0.75}
+    minimalTemperature: 10
+    maximalTemperature: 35
+    minimalHumidity: 20
+    maximalHumidity: 70
+    minimalLight: 50
+    maximalLight: 1200
+  houseDetails:
+    environment: 1
+    maxScale: {x: 0.25, y: 0.25, z: 0.25}
+    minimalTemperature: 15
+    maximalTemperature: 32
+    minimalHumidity: 20
+    maximalHumidity: 50
+    minimalLight: 50
+    maximalLight: 800
+  greenHouseDetails:
+    environment: 2
+    maxScale: {x: 0.35, y: 0.35, z: 0.35}
+    minimalTemperature: 18
+    maximalTemperature: 34
+    minimalHumidity: 25
+    maximalHumidity: 60
+    minimalLight: 100
+    maximalLight: 1000
