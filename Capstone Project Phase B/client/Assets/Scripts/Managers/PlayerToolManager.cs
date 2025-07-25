@@ -7,7 +7,7 @@ public class PlayerToolManager : Singleton<PlayerToolManager> {
     [SerializeField] private PruningShears pruningShears; // Reference to the pruning shears
     [SerializeField] private DrainageShovel drainageShovel; // Reference to the drainage shovel
     [SerializeField] private FertilizerJerrycan fertilizerJerrycan; // Reference to the fertilizer jerrycan
-    
+
     private GameObject _activeTool; // The currently active tool
     private Dictionary<PlayerItem, Vector3> _originalScales = new(); // The original scales of each tool
 
@@ -32,8 +32,7 @@ public class PlayerToolManager : Singleton<PlayerToolManager> {
     /// <param name="playerItem">The player item to activate.</param>
     /// <param name="area">The plantable area to target.</param>
     public void UseTool(PlayerItem playerItem, PlantableArea area) {
-        if (_activeTool)
-            _activeTool.SetActive(false);
+        if (_activeTool) _activeTool.SetActive(false);
 
         GameObject tool = GetTool(playerItem);
         if (!tool) return;
@@ -89,8 +88,7 @@ public class PlayerToolManager : Singleton<PlayerToolManager> {
     public void ResetTool() {
         if (!_activeTool) return;
         PlayerItem item = GetPlayerItem(_activeTool);
-        if (item != PlayerItem.None)
-            _activeTool.transform.localScale = _originalScales[item];
+        if (item != PlayerItem.None) _activeTool.transform.localScale = _originalScales[item];
         _activeTool.SetActive(false);
         _activeTool = null;
     }

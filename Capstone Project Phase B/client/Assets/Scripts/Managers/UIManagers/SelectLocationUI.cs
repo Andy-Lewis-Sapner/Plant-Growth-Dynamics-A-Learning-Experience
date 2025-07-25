@@ -11,18 +11,22 @@ using UnityEngine.UI;
 // Manages the UI for selecting a country and city location, with search and validation
 public class SelectLocationUI : UIScreen<SelectLocationUI> {
     private const int CitiesCapacity = 100; // Max number of cities shown in the dropdown
-    
+
     [SerializeField] private Button closeButton; // Close button for the screen
-    
-    [Header("Select Location UI")]
-    [SerializeField] private TMP_Dropdown countriesDropdown; // Dropdown for selecting a country
+
+    [Header("Select Location UI")] [SerializeField]
+    private TMP_Dropdown countriesDropdown; // Dropdown for selecting a country
+
     [SerializeField] private TMP_InputField countriesSearchInputField; // Input field for filtering countries
     [SerializeField] private TMP_Dropdown citiesDropdown; // Dropdown for selecting a city
     [SerializeField] private TMP_InputField citiesSearchInputField; // Input field for filtering cities
     [SerializeField] private TextMeshProUGUI errorText; // Text for displaying errors or validation messages
-    
+
     private static readonly HashSet<string> CountriesCache = new(); // Cache of available countries
-    private static readonly Dictionary<string, string[]> CountriesAndCitiesDictionary = new(); // Mapping of countries to their cities
+
+    private static readonly Dictionary<string, string[]>
+        CountriesAndCitiesDictionary = new(); // Mapping of countries to their cities
+
     private Action<string, string> _onLocationSelected; // Callback for selected location (city, country)
 
     // Called once when screen is initialized
@@ -58,8 +62,7 @@ public class SelectLocationUI : UIScreen<SelectLocationUI> {
 
     // Load country list into dropdown; fetch from API if not cached
     private IEnumerator LoadCountriesToDropdown() {
-        if (CountriesCache.Count == 0) 
-            yield return LoadCountriesAndCitiesFromApi();
+        if (CountriesCache.Count == 0) yield return LoadCountriesAndCitiesFromApi();
 
         PopulateCountriesDropdown();
         SetUserCurrentLocation(); // Fill fields with user's last known location
@@ -137,6 +140,7 @@ public class SelectLocationUI : UIScreen<SelectLocationUI> {
                     _onLocationSelected?.Invoke(selectedCity, selectedCountry);
                     break;
             }
+
             CloseScreen();
         } else {
             errorText.text = "Invalid Country or City";

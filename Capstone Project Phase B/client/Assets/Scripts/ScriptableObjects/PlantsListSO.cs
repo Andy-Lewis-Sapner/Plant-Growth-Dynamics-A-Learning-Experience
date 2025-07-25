@@ -27,4 +27,3 @@ public class PlantsListSO : ScriptableObject {
             select plantSo).FirstOrDefault();
     }
 }
-

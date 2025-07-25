@@ -50,7 +50,7 @@ public class PlantObjectPool : Singleton<PlantObjectPool> {
     /// <returns>A GameObject representing the plant.</returns>
     public GameObject GetPlant(GameObject plantPrefab, Vector3 position) {
         if (!_plantPools.ContainsKey(plantPrefab)) InitializePool(plantPrefab);
-        
+
         GameObject plant;
         if (_plantPools[plantPrefab].Count > 0) {
             plant = _plantPools[plantPrefab].Dequeue();
@@ -58,7 +58,7 @@ public class PlantObjectPool : Singleton<PlantObjectPool> {
         } else {
             plant = Instantiate(plantPrefab);
         }
-        
+
         plant.transform.position = position;
         return plant;
     }

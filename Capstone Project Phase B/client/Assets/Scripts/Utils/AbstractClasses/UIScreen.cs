@@ -26,7 +26,7 @@ public abstract class UIScreen<T> : Singleton<T> where T : Component {
     /// </summary>
     protected override void AfterAwake() {
         InitializeScreen();
-        
+
         _screenRectTransform = GetComponent<RectTransform>();
         _screenRectTransform.offsetMin = _closedOffset;
         _screenRectTransform.offsetMax = _closedOffset;
@@ -38,7 +38,7 @@ public abstract class UIScreen<T> : Singleton<T> where T : Component {
     /// </summary>
     public virtual void OpenScreen() {
         if (_isClosing) return;
-        
+
         IsScreenOpen = true;
         gameObject.SetActive(true);
         _screenRectTransform.DOKill();
@@ -54,7 +54,7 @@ public abstract class UIScreen<T> : Singleton<T> where T : Component {
     /// </summary>
     public void CloseScreen() {
         if (!IsScreenOpen || _isClosing) return;
-        
+
         _isClosing = true;
         _screenRectTransform.DOKill();
 

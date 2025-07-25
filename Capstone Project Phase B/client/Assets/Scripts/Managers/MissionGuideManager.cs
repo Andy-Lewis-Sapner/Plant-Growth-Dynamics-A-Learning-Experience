@@ -96,8 +96,7 @@ public class MissionGuideManager : Singleton<MissionGuideManager>, IUpdateObserv
     }
 
     private void OnPlantsMenuOpened(object sender, EventArgs e) {
-        if (_currentState == GuideState.OpenPlantsMenu)
-            ProceedToNextStep();
+        if (_currentState == GuideState.OpenPlantsMenu) ProceedToNextStep();
     }
 
     /// <summary>
@@ -116,7 +115,7 @@ public class MissionGuideManager : Singleton<MissionGuideManager>, IUpdateObserv
     /// <param name="missionId">The ID of the mission for which the guide is to be started.</param>
     public void StartGuide(string missionId) {
         QuestUI.Instance.CloseScreen();
-        
+
         NotificationPanelUI.Instance.EndGuideNotification();
         _activeMissionId = missionId;
         _currentState = GuideState.None;
@@ -236,7 +235,7 @@ public class MissionGuideManager : Singleton<MissionGuideManager>, IUpdateObserv
     /// <param name="e">The event data associated with the state change.</param>
     private void OnHoldingSeedChanged(object sender, EventArgs e) {
         if (_currentState != GuideState.PlantSeed || !Player.Instance.HoldingPlant) return;
-        
+
         List<PlantableArea> areasWithoutPlants = FindAreasWithoutPlants();
         PlantableArea randomArea = areasWithoutPlants[Random.Range(0, areasWithoutPlants.Count)];
         _targetPlantableArea = randomArea;
@@ -261,6 +260,7 @@ public class MissionGuideManager : Singleton<MissionGuideManager>, IUpdateObserv
                     _currentState = GuideState.Interact;
                     NotificationPanelUI.Instance.ShowGuideNotification("Interact (using E key)");
                 }
+
                 break;
             case GuideState.SelectItem:
                 _currentState = GuideState.Interact;
@@ -279,6 +279,7 @@ public class MissionGuideManager : Singleton<MissionGuideManager>, IUpdateObserv
                             : "Click the Store button to buy the required item");
                     Invoke(nameof(EndGuide), 5f);
                 }
+
                 break;
             case GuideState.Interact:
                 EndGuide();
@@ -362,8 +363,9 @@ public class MissionGuideManager : Singleton<MissionGuideManager>, IUpdateObserv
     /// to indicate that the Plants Menu is being opened and provides appropriate notifications
     /// to the player about the required actions.
     private void GuidePlantSeed() {
-        OpenPlantsMenu(InventoryManager.Instance.HasAnySeeds() ? 
-            "Please select a seed" : "Open the store to buy a seed", GuideState.PlantSeed
+        OpenPlantsMenu(
+            InventoryManager.Instance.HasAnySeeds() ? "Please select a seed" : "Open the store to buy a seed",
+            GuideState.PlantSeed
         );
     }
 
@@ -400,6 +402,7 @@ public class MissionGuideManager : Singleton<MissionGuideManager>, IUpdateObserv
                     playerItem = availableItems[Random.Range(0, availableItems.Count)];
                     if (playerItem != PlayerItem.None && playerItem != PlayerItem.WateringCan) break;
                 }
+
                 NavigateToPlants(playerItem);
             }
         }
@@ -451,8 +454,7 @@ public class MissionGuideManager : Singleton<MissionGuideManager>, IUpdateObserv
     private void OpenPlantsMenu(string message, GuideState state = GuideState.OpenPlantsMenu) {
         _currentState = state;
         PlantsMenuUI.Instance.OpenScreen();
-        if (message != string.Empty)
-            NotificationPanelUI.Instance.ShowNotification(message, 5f);
+        if (message != string.Empty) NotificationPanelUI.Instance.ShowNotification(message, 5f);
     }
 
     /// <summary>

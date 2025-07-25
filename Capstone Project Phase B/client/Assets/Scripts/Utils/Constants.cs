@@ -9,10 +9,13 @@ public static class Constants {
     /// Maps weather codes to human-readable weather types.
     /// </summary>
     public static readonly Dictionary<int, string> WeatherCodeToWeatherType = new() {
-        {0, "Clear Sky"}, {1, "Cloudy 1"}, {2, "Cloudy 2"}, {3, "Cloudy 3"}, {45, "Foggy"}, {48, "Foggy"}, {51, "Rain"},
-        {53, "Rain"}, {55, "Rain"}, {56, "Rain"}, {57, "Rain"}, {61, "Rain"}, {63, "Rain"}, {65, "Rain"}, {66, "Rain"},
-        {67, "Rain"}, {71, "Snow"}, {73, "Snow"}, {75, "Snow"}, {77, "Snow"}, {80, "Rain"}, {81, "Rain"}, {82, "Rain"},
-        {85, "Snow"}, {86, "Snow"}, {95, "Storm"}, {96, "Storm"}, {99, "Storm"}
+        { 0, "Clear Sky" }, { 1, "Cloudy 1" }, { 2, "Cloudy 2" }, { 3, "Cloudy 3" }, { 45, "Foggy" }, { 48, "Foggy" },
+        { 51, "Rain" },
+        { 53, "Rain" }, { 55, "Rain" }, { 56, "Rain" }, { 57, "Rain" }, { 61, "Rain" }, { 63, "Rain" }, { 65, "Rain" },
+        { 66, "Rain" },
+        { 67, "Rain" }, { 71, "Snow" }, { 73, "Snow" }, { 75, "Snow" }, { 77, "Snow" }, { 80, "Rain" }, { 81, "Rain" },
+        { 82, "Rain" },
+        { 85, "Snow" }, { 86, "Snow" }, { 95, "Storm" }, { 96, "Storm" }, { 99, "Storm" }
     };
 
     /// <summary>
@@ -60,12 +63,22 @@ public static class Constants {
 /// Defines types of player items used in gameplay.
 /// </summary>
 public enum PlayerItem {
-    None, WateringCan, DrainageShovel, FungicideSpray, PruningShears, InsecticideSoap, ShadeTent, NeemOil, Fertilizer
+    None,
+    WateringCan,
+    DrainageShovel,
+    FungicideSpray,
+    PruningShears,
+    InsecticideSoap,
+    ShadeTent,
+    NeemOil,
+    Fertilizer
 }
 
 /// <summary>
 /// Defines names of scenes in the game.
 /// </summary>
 public enum Scenes {
-    MainMenuScene, AlienPlanetScene, GameScene
+    MainMenuScene,
+    AlienPlanetScene,
+    GameScene
 }

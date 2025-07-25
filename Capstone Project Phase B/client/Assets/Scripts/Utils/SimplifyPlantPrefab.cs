@@ -22,18 +22,18 @@ public class SimplifyPlantPrefab : SuperBehaviour {
 
         Mesh originalMesh = meshFilter.sharedMesh;
         Mesh clonedMesh = Instantiate(originalMesh);
-        
+
         // Initialize the mesh simplifier with the cloned mesh
         MeshSimplifier meshSimplifier = new MeshSimplifier();
         meshSimplifier.Initialize(clonedMesh);
-        
+
         // Simplify the mesh to the target quality (0 = most simplified, 1 = original detail)
         meshSimplifier.SimplifyMesh(quality);
-        
+
         // Generate the simplified mesh and recalculate normals for proper shading
         Mesh simplifiedMesh = meshSimplifier.ToMesh();
         simplifiedMesh.RecalculateNormals();
-        
+
         // Determine the original mesh asset path and its directory
         string originalPath = AssetDatabase.GetAssetPath(originalMesh);
         string directory = Path.GetDirectoryName(originalPath);
@@ -41,7 +41,7 @@ public class SimplifyPlantPrefab : SuperBehaviour {
 
         // Create a new asset path for the simplified mesh using the quality percentage
         string simplifiedPath = Path.Combine(directory, $"{originalMesh.name}_{quality * 100}_Simplified.asset");
-        
+
         // Save the simplified mesh as a new asset
         AssetDatabase.CreateAsset(simplifiedMesh, simplifiedPath);
         AssetDatabase.SaveAssets();

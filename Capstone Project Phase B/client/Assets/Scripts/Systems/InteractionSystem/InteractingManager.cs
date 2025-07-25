@@ -63,7 +63,7 @@ public class InteractingManager : SuperBehaviour, IUpdateObserver {
         _mainCamera = Camera.main;
         interactableObjectNameText.text = string.Empty;
         _isGameScene = SceneManager.GetActiveScene().name == nameof(Scenes.GameScene);
-        
+
         if (_isGameScene) {
             _interactableLayerMask = ~LayerMask.GetMask("Plant");
             UIManager.Instance.OnActivityStateChanged += UIManagerOnActivityStateChanged;
@@ -134,19 +134,19 @@ public class InteractingManager : SuperBehaviour, IUpdateObserver {
             ClearInteraction();
             return;
         }
-        
+
         Transform hitTransform = hitInfo.transform;
         if (!hitTransform.TryGetComponent(out IInteractableObject interactable)) {
             ClearInteraction();
             return;
         }
-        
+
         if ((transform.position - hitTransform.position).sqrMagnitude > InteractionDistanceSqr) return;
 
         if (_interactableObject == interactable &&
             interactableObjectNameText.text == _interactableObject.ObjectName)
             return;
-        
+
         SetInteraction(interactable);
     }
 
@@ -168,14 +168,13 @@ public class InteractingManager : SuperBehaviour, IUpdateObserver {
     /// interaction with an object is no longer valid or required. 
     private void ClearInteraction() {
         if (!_canInteract) return;
-        
+
         InputManager.Instance.InteractInputAction.performed -= InteractInputActionOnPerformed;
         GuidePanelUI.Instance.SetInteractGuide(false);
         _canInteract = false;
         _interactableObject = null;
-        
-        if (interactableObjectNameText.text.Length > 0)
-            interactableObjectNameText.text = string.Empty;
+
+        if (interactableObjectNameText.text.Length > 0) interactableObjectNameText.text = string.Empty;
     }
 
     /// <summary>

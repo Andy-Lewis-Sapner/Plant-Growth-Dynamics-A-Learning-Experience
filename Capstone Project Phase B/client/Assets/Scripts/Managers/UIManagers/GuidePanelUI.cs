@@ -10,16 +10,17 @@ using UnityEngine.UI;
 public class GuidePanelUI : Singleton<GuidePanelUI> {
     private const float SlideDuration = 0.25f; // Duration of panel sliding animation
 
-    [Header("Guidance Panel")]
-    [SerializeField] private RectTransform guidancePanel; // The main guidance panel UI element
+    [Header("Guidance Panel")] [SerializeField]
+    private RectTransform guidancePanel; // The main guidance panel UI element
 
-    [Header("Guides")] 
-    [SerializedDictionary("Tool", "Guide")] 
-    [SerializeField] private SerializedDictionary<PlayerItem, GameObject> toolsGuides; // Mapping of tools to their corresponding guides
+    [Header("Guides")] [SerializedDictionary("Tool", "Guide")] [SerializeField]
+    private SerializedDictionary<PlayerItem, GameObject> toolsGuides; // Mapping of tools to their corresponding guides
+
     [SerializeField] private GameObject interactGuide; // Guide shown for interaction actions
 
-    [Header("UI Elements")]
-    [SerializeField] private Slider moistureSlider; // UI slider to show soil moisture
+    [Header("UI Elements")] [SerializeField]
+    private Slider moistureSlider; // UI slider to show soil moisture
+
     [SerializeField] private TextMeshProUGUI moistureText; // Text showing the moisture percentage
     [SerializeField] private TextMeshProUGUI scissorsMoveRotateText1; // First text element for scissors state
     [SerializeField] private TextMeshProUGUI scissorsMoveRotateText2; // Second text element for scissors state
@@ -50,8 +51,7 @@ public class GuidePanelUI : Singleton<GuidePanelUI> {
             if (guide && guide.activeSelf)
                 guide.SetActive(false);
 
-        if (interactGuide && interactGuide.activeSelf)
-            interactGuide.SetActive(false);
+        if (interactGuide && interactGuide.activeSelf) interactGuide.SetActive(false);
     }
 
     // Activates or deactivates a specific tool guide
@@ -96,7 +96,8 @@ public class GuidePanelUI : Singleton<GuidePanelUI> {
         if (_guidancePanelTween.IsActive()) yield return _guidancePanelTween.WaitForCompletion();
 
         if (isActive) {
-            _guidancePanelTween = guidancePanel.DOAnchorPos(_guidancePanelVisiblePos, SlideDuration).SetEase(Ease.OutQuad)
+            _guidancePanelTween = guidancePanel.DOAnchorPos(_guidancePanelVisiblePos, SlideDuration)
+                .SetEase(Ease.OutQuad)
                 .OnStart(() => guide.SetActive(true));
         } else {
             _guidancePanelTween = guidancePanel.DOAnchorPos(_guidancePanelHiddenPos, SlideDuration).SetEase(Ease.InQuad)
@@ -108,9 +109,9 @@ public class GuidePanelUI : Singleton<GuidePanelUI> {
     private bool HasOtherActiveGuides(GameObject excludeGuide) {
         Span<GameObject> guides = _guideValues.AsSpan();
         foreach (GameObject otherGuide in guides) {
-            if (otherGuide && otherGuide != excludeGuide && otherGuide.activeSelf)
-                return true;
+            if (otherGuide && otherGuide != excludeGuide && otherGuide.activeSelf) return true;
         }
+
         return false;
     }
 
@@ -118,8 +119,7 @@ public class GuidePanelUI : Singleton<GuidePanelUI> {
     private void DeactivateOtherGuides(GameObject excludeGuide) {
         Span<GameObject> guides = _guideValues.AsSpan();
         foreach (GameObject otherGuide in guides) {
-            if (otherGuide && otherGuide != excludeGuide && otherGuide.activeSelf)
-                otherGuide.SetActive(false);
+            if (otherGuide && otherGuide != excludeGuide && otherGuide.activeSelf) otherGuide.SetActive(false);
         }
     }
 

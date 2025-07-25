@@ -40,7 +40,7 @@ public class WeatherManager : Singleton<WeatherManager> {
     public IEnumerator FetchWeatherData() {
         yield return new WaitUntil(() => {
             bool userDataAndGeoLocationExist = DataManager.Instance.UserData != null &&
-                                                LocationManager.Instance.GeoLocationData != null;
+                                               LocationManager.Instance.GeoLocationData != null;
             bool longitudeAndLatitudeAreSet = DataManager.Instance.UserData?.longitude != 0 &&
                                               DataManager.Instance.UserData?.latitude != 0;
             return userDataAndGeoLocationExist && longitudeAndLatitudeAreSet;
@@ -136,7 +136,6 @@ public class WeatherManager : Singleton<WeatherManager> {
     /// Handles the cleanup operations when the WeatherManager object is destroyed.
     /// </summary>
     private void OnDestroy() {
-        if (_subscribedToTimeManager)
-            TimeManager.Instance.OnHourChanged -= TimeManagerOnHourChanged;
+        if (_subscribedToTimeManager) TimeManager.Instance.OnHourChanged -= TimeManagerOnHourChanged;
     }
 }

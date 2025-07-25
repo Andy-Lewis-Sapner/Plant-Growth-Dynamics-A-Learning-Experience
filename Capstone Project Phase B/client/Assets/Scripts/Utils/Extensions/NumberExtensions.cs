@@ -14,7 +14,7 @@ public static class NumberExtensions {
         int normalized = (value - min) % range;
         return normalized < 0 ? normalized + range + min : normalized + min;
     }
-    
+
     /// <summary>
     /// Returns the minimum of two double values.
     /// </summary>

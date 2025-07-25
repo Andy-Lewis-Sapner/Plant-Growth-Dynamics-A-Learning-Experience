@@ -88,25 +88,24 @@ public class PlantGrowthManager : Singleton<PlantGrowthManager>, IUpdateObserver
         float nextDiseaseUpdate = DiseaseUpdateInterval - _diseaseUpdateTimer;
         AdvancementProgress = 0f;
         DateTimeOffset baseTime = DateTimeOffset.UtcNow;
-        
+
         while (timeElapsed < secondsToAdvance) {
             UpdateAllPlantsGrowth();
             timeElapsed += GrowthUpdateInterval;
-            
+
             if (timeElapsed >= nextDiseaseUpdate) {
                 UpdateAllPlantsDiseases(baseTime.AddSeconds(nextDiseaseUpdate));
                 nextDiseaseUpdate += DiseaseUpdateInterval;
             }
-            
+
             AdvancementProgress = timeElapsed / secondsToAdvance;
             if (timeElapsed % 10f == 0) yield return null;
         }
-        
+
         DateTimeOffset currentTime = DateTimeOffset.UtcNow;
-        foreach (PlantInstance plant in _plants)
-            plant.PlantDiseaseSystem.LastDiseaseCheck = currentTime;
+        foreach (PlantInstance plant in _plants) plant.PlantDiseaseSystem.LastDiseaseCheck = currentTime;
         _diseaseUpdateTimer = 0f;
-        
+
         OnAdvanceGrowthToggled?.Invoke(this, false);
         UpdateManager.RegisterObserver(this);
     }
@@ -124,7 +123,7 @@ public class PlantGrowthManager : Singleton<PlantGrowthManager>, IUpdateObserver
 
         foreach (PlantInstance plant in _plants) {
             if (!plant.IsPlanted) continue;
-            
+
             PlantGrowthCore growthCore = plant.PlantGrowthCore;
             PlantWaterSystem waterSystem = plant.PlantWaterSystem;
             PlantEnvironment environment = plant.PlantEnvironment;
@@ -133,7 +132,7 @@ public class PlantGrowthManager : Singleton<PlantGrowthManager>, IUpdateObserver
 
             if (environment.Environment == Environment.Ground && weather.precipitation > 0)
                 waterSystem.AddMoisture(weather.precipitation * 5f);
-            
+
             waterSystem.ReduceMoistureBasedOnHumidity();
             fertilizerSystem.UpdateFertilizer();
 

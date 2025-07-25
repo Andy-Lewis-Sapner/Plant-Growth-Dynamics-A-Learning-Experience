@@ -20,7 +20,9 @@ public abstract class PlantDiseaseSystem : SuperBehaviour {
     /// Represents the base system for managing plant diseases. This class provides
     /// the foundation for handling diseases in plants, including properties and methods
     /// for disease progress, effects, cures, and disease-specific actions.
-    protected enum Disease : byte { None }
+    protected enum Disease : byte {
+        None
+    }
 
     /// <summary>
     /// Gets or sets the current disease affecting the plant.

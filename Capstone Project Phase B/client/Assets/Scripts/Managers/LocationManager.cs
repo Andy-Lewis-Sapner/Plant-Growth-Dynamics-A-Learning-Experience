@@ -28,7 +28,7 @@ public class LocationManager : Singleton<LocationManager> {
     public IEnumerator InitializeLocation() {
         yield return new WaitUntil(() =>
             DataManager.Instance.UserData?.city != null && DataManager.Instance.UserData?.country != null);
-        
+
         UserData userData = DataManager.Instance.UserData;
         if (userData.latitude != 0 && userData.longitude != 0) {
             GeoLocationData = new GeolocationData {
@@ -101,7 +101,7 @@ public class LocationManager : Singleton<LocationManager> {
         DataManager.Instance.UserData.latitude = GeoLocationData.latitude;
         DataManager.Instance.UserData.city = GeoLocationData.city;
         DataManager.Instance.UserData.country = GeoLocationData.country;
-        
+
         DayNightWeatherSystem.SetLocation(GeoLocationData.latitude, GeoLocationData.longitude);
     }
 }

@@ -11,16 +11,22 @@ using UnityEngine.SceneManagement;
 public class DataManager : Singleton<DataManager> {
     // Session token received after authentication
     public string SessionToken { get; set; }
+
     // Currently logged in username
     public string LoggedInUsername { get; set; }
+
     // User profile data retrieved from the server
     public UserData UserData { get; private set; }
+
     // Current game progress data
     public GameProgressData GameProgress { get; private set; }
+
     // Flag indicating whether all plants have been instantiated
     public bool InstantiatedAllPlants { get; private set; }
+
     // Public getter for ScriptableObject that stores all available plants
     public PlantsListSO PlantsListSo => plantsListSo;
+
     // Public getter for ScriptableObject that stores all available fertilizers
     public FertilizerListSO FertilizerListSo => fertilizerListSo;
 
@@ -96,12 +102,13 @@ public class DataManager : Singleton<DataManager> {
             PlantableArea plantableArea =
                 EnvironmentManager.Instance.GetPlantableAreaByHierarchyPath(plantData.plantableArea);
             if (!plantableArea) continue;
-            
+
             yield return plantableArea.Plant(plantSo.plantPrefab);
             if (plantableArea.PlantInstance) plantableArea.PlantInstance.Initialize(plantData, plantableArea);
             loaded++;
             if (loaded % plantsPerFrame == 0) yield return new WaitForEndOfFrame();
         }
+
         InstantiatedAllPlants = true;
     }
 
@@ -111,7 +118,7 @@ public class DataManager : Singleton<DataManager> {
 
         // Convert each plant instance to its data representation
         foreach (PlantData plantData in EnvironmentManager.Instance.GetAllPlantsForSaving()
-                     .Select(plantInstance => plantInstance.UpdatePlantData())) 
+                     .Select(plantInstance => plantInstance.UpdatePlantData()))
             _plantsData.Add(plantData);
 
         // Ensure GameProgress is initialized

@@ -41,7 +41,10 @@ public class FicusLyrataDiseaseSystem : PlantDiseaseSystem {
     /// for an extended period of time, promoting fungal growth and damaging the roots.
     /// </summary>
     private new enum Disease : byte {
-        None, RootRot, SpiderMites, LeafScorch
+        None,
+        RootRot,
+        SpiderMites,
+        LeafScorch
     }
 
     /// <summary>
@@ -83,13 +86,11 @@ public class FicusLyrataDiseaseSystem : PlantDiseaseSystem {
         if (moisture > RootRotMoistureThreshold && Random.value < 0.05f) {
             CurrentDisease = Disease.RootRot;
             DiseaseProgress = 0f;
-        }
-        else if (humidity < SpiderMitesHumidityThreshold && Random.value < 0.04f) {
+        } else if (humidity < SpiderMitesHumidityThreshold && Random.value < 0.04f) {
             CurrentDisease = Disease.SpiderMites;
             DiseaseProgress = 0f;
-        }
-        else if (lightLevel > LeafScorchLightThreshold && Random.value < 0.03f &&
-                 PlantEnvironment.Environment == Environment.Ground) {
+        } else if (lightLevel > LeafScorchLightThreshold && Random.value < 0.03f &&
+                   PlantEnvironment.Environment == Environment.Ground) {
             CurrentDisease = Disease.LeafScorch;
             DiseaseProgress = 0f;
         }
@@ -225,7 +226,7 @@ public class FicusLyrataDiseaseSystem : PlantDiseaseSystem {
             LastDiseaseCheck = DateTimeOffset.UtcNow;
         }
     }
-    
+
     /// <summary>
     /// Retrieves the names of all diseases.
     /// </summary>

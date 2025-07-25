@@ -72,8 +72,8 @@ public class PlantableArea : SuperBehaviour, IInteractableObject {
     /// <summary>
     /// Represents the designated location or type of environment where a plant can be placed.
     /// </summary>
-    [Header("Planting Details")] 
-    [SerializeField] private Environment environment;
+    [Header("Planting Details")] [SerializeField]
+    private Environment environment;
 
     /// Represents the positional offset applied when placing a plant in the plantable area.
     /// This offset adjusts the position of the plant relative to the predefined planting location.
@@ -82,8 +82,7 @@ public class PlantableArea : SuperBehaviour, IInteractableObject {
     /// <summary>
     /// Represents the UI element that serves as an indicator for plant disease status.
     /// </summary>
-    [Header("UI")] 
-    [SerializeField] private GameObject diseaseAlert;
+    [Header("UI")] [SerializeField] private GameObject diseaseAlert;
 
     /// <summary>
     /// The private field _materialUpdater is responsible for managing material updates
@@ -109,7 +108,7 @@ public class PlantableArea : SuperBehaviour, IInteractableObject {
         _materialUpdater = GetComponent<PlantableAreaMaterialUpdater>();
         ToolsManager = transform.parent.GetComponentInChildren<PlantableAreaToolsManager>();
         diseaseAlert.SetActive(false);
-        
+
         InventoryManager.Instance.OnPlayerHoldingItemChanged += OnPlayerHoldingItemChanged;
         Player.Instance.OnPlayerHoldingPlantSeedStateChanged += OnPlayerHoldingPlantSeedStateChanged;
     }
@@ -199,7 +198,7 @@ public class PlantableArea : SuperBehaviour, IInteractableObject {
         if (holdingItem is not (PlayerItem.WateringCan or PlayerItem.Fertilizer) &&
             !availableCures.Contains(holdingItem))
             return false;
-        
+
         switch (holdingItem) {
             case PlayerItem.PruningShears when !PlantInstance.PlantGrowthCore.IsPlantScaleEnoughForPruning():
                 NotificationPanelUI.Instance.ShowNotification(
@@ -236,7 +235,7 @@ public class PlantableArea : SuperBehaviour, IInteractableObject {
         plant.transform.SetParent(EnvironmentManager.Instance.AllGrowingPlants);
         plant.TryGetComponent(out PlantInstance plantInstance);
         PlantInstance = plantInstance;
-        
+
         _materialUpdater.UpdateMaterial(false);
         ObjectName = InventoryManager.Instance.HoldingPlayerItem == PlayerItem.None
             ? PlantInstance?.PlantGrowthCore?.PlantName
@@ -255,7 +254,7 @@ public class PlantableArea : SuperBehaviour, IInteractableObject {
     private void SetPlantPropertiesAndEvents(bool isLoaded = false) {
         PlantInstance.PlantWaterSystem.OnMoistureLevelChanged += PlantWaterSystemOnMoistureCounterChanged;
         PlantInstance.PlantDiseaseSystem.OnDiseaseChanged += PlantDiseaseSystemOnDiseaseChanged;
-        
+
         PlantInstance.SetPlantableArea(this);
         PlantInstance.PlantGrowthCore.SetToolsManager(ToolsManager);
         PlantInstance.PlantEnvironment.SetPlantingLocation(environment);
@@ -264,7 +263,7 @@ public class PlantableArea : SuperBehaviour, IInteractableObject {
             PlantInstance.PlantDiseaseSystem.LastDiseaseCheck =
                 DateTimeOffset.UtcNow.Subtract(TimeSpan.FromSeconds(3600f));
         }
-        
+
         PlantGrowthManager.Instance.RegisterPlant(PlantInstance);
     }
 
@@ -341,18 +340,23 @@ public class PlantableArea : SuperBehaviour, IInteractableObject {
         if (!PlantInstance) return;
         bool wasWatered = false;
 
-        if (PlayerToolManager.Instance.GetTool(PlayerItem.WateringCan).TryGetComponent(out WateringCan wateringCan) && wateringCan.WaterParticles.gameObject == other) {
+        if (PlayerToolManager.Instance.GetTool(PlayerItem.WateringCan).TryGetComponent(out WateringCan wateringCan) &&
+            wateringCan.WaterParticles.gameObject == other) {
             float moisture = AddMoistureFromCollision(WateringCanMoisturePerCollision);
             GuidePanelUI.Instance.SetMoisture(moisture);
             ApplyCure(PlayerItem.WateringCan);
             wasWatered = true;
-        } else if (PlayerToolManager.Instance.GetTool(PlayerItem.FungicideSpray).TryGetComponent(out SprayBottle sprayBottle) && sprayBottle.SprayingEffect.gameObject == other) {
+        } else if (PlayerToolManager.Instance.GetTool(PlayerItem.FungicideSpray)
+                       .TryGetComponent(out SprayBottle sprayBottle) &&
+                   sprayBottle.SprayingEffect.gameObject == other) {
             ApplyCure(sprayBottle.CurrentSpray);
         } else if (other.CompareTag("WaterParticle")) {
             AddMoistureFromCollision(GardenSprinklerMoisturePerCollision);
             ApplyCure(PlayerItem.WateringCan);
             wasWatered = true;
-        } else if (PlayerToolManager.Instance.GetTool(PlayerItem.Fertilizer).TryGetComponent(out FertilizerJerrycan fertilizerJerrycan) && fertilizerJerrycan.FertilizerEffect.gameObject == other) {
+        } else if (PlayerToolManager.Instance.GetTool(PlayerItem.Fertilizer)
+                       .TryGetComponent(out FertilizerJerrycan fertilizerJerrycan) &&
+                   fertilizerJerrycan.FertilizerEffect.gameObject == other) {
             ApplyFertilizer(fertilizerJerrycan.Fertilizer);
         }
 

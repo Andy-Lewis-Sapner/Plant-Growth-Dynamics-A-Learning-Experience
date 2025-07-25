@@ -12,8 +12,8 @@ public class PlantDiseaseIdentifier : Singleton<PlantDiseaseIdentifier> {
     /// <summary>
     /// Represents a serialized neural network model used for identifying diseases in Ficus plants.
     /// </summary>
-    [Header("Plants Disease Models")] 
-    [SerializeField] private NNModel ficusModel;
+    [Header("Plants Disease Models")] [SerializeField]
+    private NNModel ficusModel;
 
     /// <summary>
     /// Represents the neural network model used for identifying diseases specific to Orchid plants.
@@ -98,7 +98,7 @@ public class PlantDiseaseIdentifier : Singleton<PlantDiseaseIdentifier> {
         Tensor input = Preprocess(inputImage);
         _worker.Execute(input);
         Tensor output = _worker.PeekOutput();
-        
+
         UploadingDiseaseUI.Instance.OpenScreen();
         UploadingDiseaseUI.Instance.SetCurrentPlant(_currentPlant);
         UploadingDiseaseUI.Instance.CreateDiseaseButtons(output.ToReadOnlyArray());
@@ -133,7 +133,7 @@ public class PlantDiseaseIdentifier : Singleton<PlantDiseaseIdentifier> {
     /// <param name="image">The input texture to be preprocessed.</param>
     /// <returns>A tensor containing the processed image data.</returns>
     private static Tensor Preprocess(Texture2D image) {
-        Texture2D resized = PlantIdentification.ResizeTexture(image, 224, 224); 
+        Texture2D resized = PlantIdentification.ResizeTexture(image, 224, 224);
         Color[] pixels = resized.GetPixels();
         float[] data = new float[3 * 224 * 224];
 

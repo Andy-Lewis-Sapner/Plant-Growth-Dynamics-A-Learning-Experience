@@ -71,11 +71,11 @@ public class PlantableAreaMaterialUpdater : SuperBehaviour, IUpdateObserver {
     /// </summary>
     public void ObservedUpdate() {
         if (_plantableArea.Environment != Environment.Ground) return;
-        
+
         _timeSinceLastUpdate += Time.deltaTime;
         if (_timeSinceLastUpdate < UpdateInterval) return;
         _timeSinceLastUpdate -= UpdateInterval;
-        
+
         float sqrDistance = (transform.position - Player.Instance.PlayerPosition).sqrMagnitude;
         bool isPlayerNearGround = sqrDistance <= UpdateMaterialDistanceSqr;
 
@@ -114,8 +114,7 @@ public class PlantableAreaMaterialUpdater : SuperBehaviour, IUpdateObserver {
     /// if the associated PlantableArea's environment is set to Ground.
     /// </summary>
     private void OnEnable() {
-        if (_plantableArea && _plantableArea.Environment == Environment.Ground)
-            UpdateManager.RegisterObserver(this);
+        if (_plantableArea && _plantableArea.Environment == Environment.Ground) UpdateManager.RegisterObserver(this);
     }
 
     /// <summary>
@@ -125,7 +124,6 @@ public class PlantableAreaMaterialUpdater : SuperBehaviour, IUpdateObserver {
     /// This ensures the instance does not continue to receive update notifications when it is no longer in use.
     /// </summary>
     private void OnDisable() {
-        if (_plantableArea && _plantableArea.Environment == Environment.Ground)
-            UpdateManager.UnregisterObserver(this);
+        if (_plantableArea && _plantableArea.Environment == Environment.Ground) UpdateManager.UnregisterObserver(this);
     }
 }

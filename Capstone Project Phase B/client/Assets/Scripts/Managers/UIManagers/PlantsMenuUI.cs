@@ -21,7 +21,8 @@ public class PlantsMenuUI : UIScreen<PlantsMenuUI> {
     // Called on Start; updates UI and subscribes to inventory change events
     private void Start() {
         InventoryManagerOnPlantsInventoryChanged(null, EventArgs.Empty); // Initialize plant list display
-        InventoryManager.Instance.OnPlantsInventoryChanged += InventoryManagerOnPlantsInventoryChanged; // Subscribe to updates
+        InventoryManager.Instance.OnPlantsInventoryChanged +=
+            InventoryManagerOnPlantsInventoryChanged; // Subscribe to updates
     }
 
     public override void OpenScreen() {
@@ -45,7 +46,8 @@ public class PlantsMenuUI : UIScreen<PlantsMenuUI> {
     private void InventoryManagerOnPlantsInventoryChanged(object sender, EventArgs e) {
         foreach (PlantItem plantItem in plantItems) {
             // If player has 0 of the plant, disable the button
-            if (!InventoryManager.Instance.PlayerPlantsInventory.TryGetValue(plantItem.plantSo, out int amount) || amount <= 0) {
+            if (!InventoryManager.Instance.PlayerPlantsInventory.TryGetValue(plantItem.plantSo, out int amount) ||
+                amount <= 0) {
                 plantItem.plantAmountText.text = "0";
                 plantItem.plantButton.interactable = false;
             } else {
@@ -76,6 +78,7 @@ public class PlantsMenuUI : UIScreen<PlantsMenuUI> {
             InputManager.Instance.CancelInputAction.performed -= ReturnPlantToInventory;
             return;
         }
+
         InventoryManager.Instance.ReturnPlant(Player.Instance.HoldingPlant); // Return the plant to inventory
         Player.Instance.HoldingPlant = null; // Clear the held plant
         InputManager.Instance.CancelInputAction.performed -= ReturnPlantToInventory; // Unsubscribe input
@@ -104,7 +107,8 @@ public class PlantsMenuUI : UIScreen<PlantsMenuUI> {
         if (!storeButton) return;
         storeButton.DOKill(); // Stop existing animations
         Sequence sequence = DOTween.Sequence(); // Create animation sequence
-        sequence.Append(storeButton.DOFade(0.5f, 0.5f)).Append(storeButton.DOFade(1f, 0.5f)).SetLoops(10); // Blink animation
+        sequence.Append(storeButton.DOFade(0.5f, 0.5f)).Append(storeButton.DOFade(1f, 0.5f))
+            .SetLoops(10); // Blink animation
     }
 
     // Cleanup event listeners when the object is destroyed
@@ -125,5 +129,3 @@ public class PlantsMenuUI : UIScreen<PlantsMenuUI> {
         public TextMeshProUGUI plantAmountText; // Text showing how many of this plant the player owns
     }
 }
-
-

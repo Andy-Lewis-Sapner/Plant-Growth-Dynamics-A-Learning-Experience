@@ -3,14 +3,17 @@ using UnityEngine.UI;
 
 // Handles the UI for uploading a plant image and confirming the predicted plant
 public class UploadingPlantUI : UIScreen<UploadingPlantUI> {
-    [Header("Image and Text Components")]
-    [SerializeField] private Image fileBrowserImage; // Displays the uploaded image
+    [Header("Image and Text Components")] [SerializeField]
+    private Image fileBrowserImage; // Displays the uploaded image
+
     [SerializeField] private TypeWriterEffect predictLabel; // Displays the predicted plant name
     [SerializeField] private TypeWriterEffect errorMessage; // Displays an error message if prediction fails
 
     // Called when the user clicks the continue button to confirm prediction
     public void OnContinueButtonClicked() {
-        PlantSO plantSo = DataManager.Instance.PlantsListSo.FindPlantSoByName(predictLabel.Text); // Try to find plant by predicted name
+        PlantSO plantSo =
+            DataManager.Instance.PlantsListSo
+                .FindPlantSoByName(predictLabel.Text); // Try to find plant by predicted name
         GameObject plantPrefab = plantSo.plantPrefab;
         if (plantPrefab) {
             Player.Instance.HoldingPlant = plantSo; // Assign plant to player
@@ -19,7 +22,7 @@ public class UploadingPlantUI : UIScreen<UploadingPlantUI> {
             errorMessage.Text = "Couldn't find the predicted plant. Try Again."; // Show error
         }
     }
-    
+
     public void OnUploadButtonClicked() {
         CloseScreen();
         FileBrowserManager.Instance.OpenFileBrowser(FileBrowserManager.IdentificationType.IdentifyPlant);
@@ -27,8 +30,7 @@ public class UploadingPlantUI : UIScreen<UploadingPlantUI> {
 
     // Displays the selected image in the UI and opens the screen
     public void SetFileBrowserImage(Sprite sprite) {
-        if (fileBrowserImage.sprite != sprite)
-            fileBrowserImage.sprite = sprite;
+        if (fileBrowserImage.sprite != sprite) fileBrowserImage.sprite = sprite;
         OpenScreen();
     }
 

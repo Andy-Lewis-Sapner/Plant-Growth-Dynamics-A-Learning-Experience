@@ -9,7 +9,9 @@ public class HelpPanelUI : Singleton<HelpPanelUI> {
     /// Hides the help panel on start.
     /// </summary>
     private void Start() {
-        HideHelp();   
+        helpPanel.localScale = Vector3.zero;
+        helpText.Text = string.Empty;
+        helpPanel.gameObject.SetActive(false);
     }
 
     /// <summary>

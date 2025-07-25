@@ -27,8 +27,7 @@ public class MainMenuAnimation : SuperBehaviour {
     private void InitializeElements() {
         titleText.color = new Color(titleText.color.r, titleText.color.g, titleText.color.b, 0f);
         subtitleText.color = new Color(subtitleText.color.r, subtitleText.color.g, subtitleText.color.b, 0f);
-        foreach (Button button in buttons) 
-            button.transform.localScale = Vector3.zero;
+        foreach (Button button in buttons) button.transform.localScale = Vector3.zero;
     }
 
     /// <summary>
@@ -36,7 +35,7 @@ public class MainMenuAnimation : SuperBehaviour {
     /// </summary>
     private void PlayAnimation() {
         Sequence sequence = DOTween.Sequence();
-        
+
         sequence.Append(titleText.rectTransform.DOAnchorPos(new Vector2(193, 326), 0.7f).From(new Vector2(193, 100))
             .SetEase(Ease.OutBack));
         sequence.Join(titleText.DOFade(1f, 0.7f));

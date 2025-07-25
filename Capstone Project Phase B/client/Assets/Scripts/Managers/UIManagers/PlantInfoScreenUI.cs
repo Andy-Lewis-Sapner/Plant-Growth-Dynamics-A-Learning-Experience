@@ -17,12 +17,10 @@ public class PlantInfoScreenUI : UIScreen<PlantInfoScreenUI> {
         if (!plantSo) return; // Exit if the provided plant is null
 
         // Set the plant name if it has changed
-        if (plantName.Text != plantSo.plantName)
-            plantName.Text = plantSo.plantName;
+        if (plantName.Text != plantSo.plantName) plantName.Text = plantSo.plantName;
 
         // Set the plant description if it has changed
-        if (plantDescription.Text != plantSo.briefDescription)
-            plantDescription.Text = plantSo.briefDescription;
+        if (plantDescription.Text != plantSo.briefDescription) plantDescription.Text = plantSo.briefDescription;
 
         // Always update the image sprite
         plantImage.sprite = plantSo.plantSprite;
@@ -31,7 +29,8 @@ public class PlantInfoScreenUI : UIScreen<PlantInfoScreenUI> {
         if (_lastPlantName != plantSo.plantName || string.IsNullOrEmpty(_cachedRecommendation)) {
             int growingRecommendations = plantSo.growingRecommendations.Count;
             _cachedRecommendation = growingRecommendations > 0
-                ? plantSo.growingRecommendations[Random.Range(0, growingRecommendations)] // Pick a random recommendation
+                ? plantSo.growingRecommendations
+                    [Random.Range(0, growingRecommendations)] // Pick a random recommendation
                 : string.Empty;
 
             _lastPlantName = plantSo.plantName; // Update the cached plant name

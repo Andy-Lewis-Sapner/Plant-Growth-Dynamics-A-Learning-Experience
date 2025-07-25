@@ -45,7 +45,7 @@ public class PruningShears : SuperBehaviour, IUpdateObserver {
 
     /// Represents the particle system for leaf effects triggered during pruning.
     [SerializeField] private ParticleSystem leafParticles;
-    
+
     /// Represents the audio source for the pruning shears.
     [SerializeField] private AudioSource scissorsAudio;
 
@@ -107,7 +107,7 @@ public class PruningShears : SuperBehaviour, IUpdateObserver {
             cameraRight.y = cameraForward.y = 0;
             cameraRight.Normalize();
             cameraForward.Normalize();
-            
+
             Vector3 moveDirection = (cameraRight * moveInput.x + cameraForward * moveInput.y).normalized;
             newPosition += moveDirection * (MoveSpeed * Time.deltaTime);
             newPosition.y += InputManager.Instance.LookInput.y * (MouseSensitivity * Time.deltaTime);
@@ -147,7 +147,7 @@ public class PruningShears : SuperBehaviour, IUpdateObserver {
 
         float cameraSideOffset = modifier * CameraSideOffset;
         float cameraHeight = modifier * CameraHeight;
-        
+
         float absX = Mathf.Abs(relativePosition.x);
         float absZ = Mathf.Abs(relativePosition.z);
 
@@ -182,11 +182,11 @@ public class PruningShears : SuperBehaviour, IUpdateObserver {
         InputManager.Instance.AttackInputAction.performed -= PerformCut;
         InputManager.Instance.CrouchInputAction.performed -= SwitchBetweenRotateAndMovement;
         ResetCamera();
-        
+
         if (!_isActive) return;
         _isActive = false;
         gameObject.SetActive(false);
-        
+
         Player.Instance.DisableMovement = false;
         UIManager.Instance.ActivityState = false;
         MouseMovement.Instance.UpdateCursorSettings(false);
@@ -211,7 +211,7 @@ public class PruningShears : SuperBehaviour, IUpdateObserver {
             _groundExtents = groundCollider.bounds.extents;
             _groundHeight = groundCollider.bounds.max.y;
         }
-        
+
         float modifier = area.Environment switch {
             Environment.Ground => 1f,
             Environment.GreenHouse => 0.5f,
@@ -219,18 +219,18 @@ public class PruningShears : SuperBehaviour, IUpdateObserver {
             _ => 1f
         };
         SetSideCamera(modifier);
-        
+
         shearBlades.localEulerAngles =
             new Vector3(shearBlades.localEulerAngles.x, OpenAngle, shearBlades.localEulerAngles.z);
-        
+
         _isActive = true;
         gameObject.SetActive(true);
-        
+
         Player.Instance.DisableMovement = true;
         UIManager.Instance.ActivityState = true;
         MouseMovement.Instance.UpdateCursorSettings(true);
         GuidePanelUI.Instance.SetToolGuideActive(PlayerItem.PruningShears, true);
-        
+
         InputManager.Instance.AttackInputAction.performed += PerformCut;
         InputManager.Instance.CrouchInputAction.performed += SwitchBetweenRotateAndMovement;
     }
@@ -261,7 +261,7 @@ public class PruningShears : SuperBehaviour, IUpdateObserver {
         cutSequence.Append(shearBlades
             .DOLocalRotate(new Vector3(shearBlades.localEulerAngles.x, OpenAngle, shearBlades.localEulerAngles.z),
                 CutAnimationDuration / 2).SetEase(Ease.InOutQuad)).OnComplete(() => IsCutting = false);
-        
+
         AudioManager.Instance.PlaySoundEffect(AudioManager.SoundID.ScissorsCut, scissorsAudio);
     }
 

@@ -138,7 +138,7 @@ public class InventoryManager : Singleton<InventoryManager> {
             else
                 PlayerPlantsInventory[plantToPurchase.Key] += plantToPurchase.Value;
         }
-        
+
         OnPlantsInventoryChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -170,7 +170,7 @@ public class InventoryManager : Singleton<InventoryManager> {
     /// true if there is at least one seed with a quantity greater than zero in the player's inventory; otherwise, false.
     /// </returns>
     public bool HasAnySeeds() {
-        return PlayerPlantsInventory.Values.Any(amount => amount > 0); 
+        return PlayerPlantsInventory.Values.Any(amount => amount > 0);
     }
 
     /// Adds specified fertilizers to the player's inventory. The quantity for each fertilizer
@@ -226,29 +226,26 @@ public class InventoryManager : Singleton<InventoryManager> {
         StoreMenuUI.Instance.UpdatePointsUI(null, Points);
 
         PlayerAvailableTools.Clear();
-        if (data.playerAvailableTools != null) 
+        if (data.playerAvailableTools != null)
             foreach (string toolName in data.playerAvailableTools)
                 if (Enum.TryParse(toolName, out PlayerItem item))
                     PlayerAvailableTools.Add(item);
 
-        if (!PlayerAvailableTools.Contains(PlayerItem.None)) 
-            PlayerAvailableTools.Add(PlayerItem.None);
+        if (!PlayerAvailableTools.Contains(PlayerItem.None)) PlayerAvailableTools.Add(PlayerItem.None);
         StoreMenuUI.Instance.InitializeToolsTab();
 
         PlayerPlantsInventory.Clear();
-        if (data.playerPlantsInventory != null) 
+        if (data.playerPlantsInventory != null)
             foreach (KeyValuePair<string, int> pair in data.playerPlantsInventory) {
                 PlantSO plant = DataManager.Instance.PlantsListSo.FindPlantSoByName(pair.Key);
-                if (plant && pair.Value > 0) 
-                    PlayerPlantsInventory[plant] = pair.Value;
+                if (plant && pair.Value > 0) PlayerPlantsInventory[plant] = pair.Value;
             }
 
         PlayerFertilizersInventory.Clear();
-        if (data.playerFertilizersInventory != null) 
+        if (data.playerFertilizersInventory != null)
             foreach (KeyValuePair<string, int> pair in data.playerFertilizersInventory) {
                 FertilizerSO fertilizer = DataManager.Instance.FertilizerListSo.GetFertilizerByName(pair.Key);
-                if (fertilizer && pair.Value > 0) 
-                    PlayerFertilizersInventory[fertilizer] = pair.Value;
+                if (fertilizer && pair.Value > 0) PlayerFertilizersInventory[fertilizer] = pair.Value;
             }
     }
 

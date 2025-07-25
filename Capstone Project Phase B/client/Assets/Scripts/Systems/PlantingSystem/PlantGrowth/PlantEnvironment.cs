@@ -76,5 +76,7 @@ public class PlantEnvironment : SuperBehaviour {
 /// Specifies the types of environments where a plant or action can exist or occur.
 /// </summary>
 public enum Environment {
-    Ground, House, GreenHouse
+    Ground,
+    House,
+    GreenHouse
 }

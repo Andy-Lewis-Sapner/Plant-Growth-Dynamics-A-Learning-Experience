@@ -15,13 +15,12 @@ public static class StringExtensions {
 
         int upperCount = str.Count(char.IsUpper);
         if (upperCount == 0 || (upperCount == 1 && char.IsUpper(str[0]))) return str;
-        
+
         StringBuilder result = new StringBuilder(str.Length + upperCount);
         result.Append(str[0]);
 
         for (int i = 1; i < str.Length; i++) {
-            if (char.IsUpper(str[i]))
-                result.Append(' ');
+            if (char.IsUpper(str[i])) result.Append(' ');
 
             result.Append(str[i]);
         }
@@ -45,8 +44,7 @@ public static class StringExtensions {
     /// <returns>The word prefixed with "a" or "an".</returns>
     public static string AddAOrAn(this string word) {
         char firstChar = char.ToLower(word[0]);
-        if (firstChar is 'a' or 'e' or 'i' or 'o' or 'u') 
-            return "an " + word;
+        if (firstChar is 'a' or 'e' or 'i' or 'o' or 'u') return "an " + word;
         return "a " + word;
     }
 }

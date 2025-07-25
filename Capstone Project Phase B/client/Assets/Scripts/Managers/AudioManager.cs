@@ -12,7 +12,7 @@ public class AudioManager : Singleton<AudioManager> {
     private const string BackgroundMusicVolumeKey = "BackgroundMusicVolume";
     private const string EnvironmentVolumeKey = "EnvironmentVolume";
     private const string SoundEffectsVolumeKey = "SoundEffectsVolume";
-    
+
     // Background music volume property
     public float BackgroundMusicVolume {
         get => backgroundMusicAudioSource.volume;
@@ -22,7 +22,7 @@ public class AudioManager : Singleton<AudioManager> {
             PlayerPrefs.SetFloat(BackgroundMusicVolumeKey, value);
         }
     }
-    
+
     // Environment volume property
     public float EnvironmentVolume {
         get => _ambientAudioSources.Count == 0 ? 1f : _ambientAudioSources[0].volume;
@@ -44,25 +44,27 @@ public class AudioManager : Singleton<AudioManager> {
             SetSoundEffectsVolume();
         }
     }
+
     [SerializeField] private AudioSource backgroundMusicAudioSource; // Audio source for playing background music
 
-    [Header("Background Music")]
-    [SerializeField] private AudioClip menuScreenBackgroundMusic; // Music for the main menu screen
+    [Header("Background Music")] [SerializeField]
+    private AudioClip menuScreenBackgroundMusic; // Music for the main menu screen
+
     [SerializeField] private AudioClip alienPlanetBackgroundMusic; // Music for the alien planet scene
     [SerializeField] private List<AudioClip> gameSceneSongs; // List of songs for the game scene
-    
-    [Header("Tools and Environment")]
-    [SerializeField] private SerializedDictionary<SoundID, AudioClip> soundEffectsDictionary; // Dictionary of sound effects
 
-    [Header("Click Sound Effect")] 
-    [SerializeField] private AudioSource clickAudioSource; // Audio source for playing click sound
+    [Header("Tools and Environment")] [SerializeField]
+    private SerializedDictionary<SoundID, AudioClip> soundEffectsDictionary; // Dictionary of sound effects
+
+    [Header("Click Sound Effect")] [SerializeField]
+    private AudioSource clickAudioSource; // Audio source for playing click sound
 
     private AudioClip _currentBackgroundMusic; // The currently playing music clip
     private Coroutine _playNextSongCoroutine; // Coroutine that waits for song to finish and plays next
     private float _soundEffectsVolume; // Volume of sound effects
     private readonly List<AudioSource> _ambientAudioSources = new(); // List of ambient audio sources
     private readonly List<AudioSource> _soundEffectsAudioSources = new(); // List of sound effect audio sources
-    
+
     // Subscribe to scene loaded event, load volume settings, and play music
     private void Start() {
         SceneManager.sceneLoaded += SceneManagerOnNewSceneLoaded;
@@ -91,7 +93,7 @@ public class AudioManager : Singleton<AudioManager> {
                 PlayMusicBasedOnScene(scene);
                 break;
         }
-        
+
         _soundEffectsAudioSources.Clear();
     }
 
@@ -135,8 +137,7 @@ public class AudioManager : Singleton<AudioManager> {
         PlayBackgroundMusic(targetClip);
 
         // If game scene, start looping through songs
-        if (sceneName == nameof(Scenes.GameScene))
-            _playNextSongCoroutine = StartCoroutine(PlayNextSongWhenFinished());
+        if (sceneName == nameof(Scenes.GameScene)) _playNextSongCoroutine = StartCoroutine(PlayNextSongWhenFinished());
     }
 
     // Plays a specific audio clip, stopping any currently playing clip
@@ -159,8 +160,7 @@ public class AudioManager : Singleton<AudioManager> {
         List<AudioClip> availableSongs = gameSceneSongs;
 
         // If only one song exists or no exclusion needed, return any
-        if (!excludeClip || gameSceneSongs.Count <= 1)
-            return availableSongs[Random.Range(0, availableSongs.Count)];
+        if (!excludeClip || gameSceneSongs.Count <= 1) return availableSongs[Random.Range(0, availableSongs.Count)];
 
         // Filter out the currently playing clip
         availableSongs = new List<AudioClip>(gameSceneSongs.Count);

@@ -6,14 +6,15 @@ using UnityEngine;
 public class RegisterInputsValidity : SuperBehaviour {
     private const string EmailRegex =
         "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
+
     private const string UsernameRegex = "^[a-zA-Z0-9_]+$";
     private const string PasswordRegex = @"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
-    
+
     [SerializeField] private TextMeshProUGUI registerMessageText;
     [SerializeField] private TMP_InputField emailInputField;
     [SerializeField] private TMP_InputField usernameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
-    
+
     /// <summary>
     /// Validates email input on change and displays appropriate validation messages.
     /// </summary>
@@ -41,7 +42,7 @@ public class RegisterInputsValidity : SuperBehaviour {
                 ? "Username can only contain letters, numbers and underscores."
                 : string.Empty;
     }
-    
+
     /// <summary>
     /// Validates password input on change and displays appropriate validation messages.
     /// Password must be at least 8 characters long and contain one letter, one number, and one special character.
@@ -63,7 +64,7 @@ public class RegisterInputsValidity : SuperBehaviour {
     private static bool CheckInputValidity(string input, string regex) {
         return Regex.IsMatch(input, regex);
     }
-    
+
     /// <summary>
     /// Checks if all input fields have valid values.
     /// </summary>

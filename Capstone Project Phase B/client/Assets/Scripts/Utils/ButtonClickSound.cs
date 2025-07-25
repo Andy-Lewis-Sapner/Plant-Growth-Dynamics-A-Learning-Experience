@@ -11,7 +11,7 @@ public class ButtonClickSound : SuperBehaviour {
         _button = GetComponent<Button>();
         _button?.onClick.AddListener(() => AudioManager.Instance.PlayClickSoundEffect());
     }
-    
+
     /**
      * <summary>Removes the event listener when the component is destroyed.</summary>
      */

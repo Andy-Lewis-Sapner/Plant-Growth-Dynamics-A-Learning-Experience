@@ -50,7 +50,11 @@ public class OrchidDiseaseSystem : PlantDiseaseSystem {
     /// Represents the types of diseases that can affect orchids within the Orchid Disease System.
     /// </summary>
     private new enum Disease : byte {
-        None, RootRot, SpiderMites, Scale, FungalLeafSpot
+        None,
+        RootRot,
+        SpiderMites,
+        Scale,
+        FungalLeafSpot
     }
 
     /// <summary>
@@ -90,21 +94,21 @@ public class OrchidDiseaseSystem : PlantDiseaseSystem {
         if (moisture > RootRotMoistureThreshold && Random.value < 0.05f) {
             CurrentDisease = Disease.RootRot;
             DiseaseProgress = 0f;
-        }
-        else switch (humidity) {
-            case < SpiderMitesHumidityThreshold when Random.value < 0.04f:
-                CurrentDisease = Disease.SpiderMites;
-                DiseaseProgress = 0f;
-                break;
-            case < ScaleHumidityThreshold when Random.value < 0.03f:
-                CurrentDisease = Disease.Scale;
-                DiseaseProgress = 0f;
-                break;
-            case > 70f when moisture > FungalLeafSpotMoistureThreshold && Random.value < 0.03f:
-                CurrentDisease = Disease.FungalLeafSpot;
-                DiseaseProgress = 0f;
-                break;
-        }
+        } else
+            switch (humidity) {
+                case < SpiderMitesHumidityThreshold when Random.value < 0.04f:
+                    CurrentDisease = Disease.SpiderMites;
+                    DiseaseProgress = 0f;
+                    break;
+                case < ScaleHumidityThreshold when Random.value < 0.03f:
+                    CurrentDisease = Disease.Scale;
+                    DiseaseProgress = 0f;
+                    break;
+                case > 70f when moisture > FungalLeafSpotMoistureThreshold && Random.value < 0.03f:
+                    CurrentDisease = Disease.FungalLeafSpot;
+                    DiseaseProgress = 0f;
+                    break;
+            }
     }
 
     /// Updates the disease progression of a plant based on current environmental conditions and the type of disease.
@@ -240,7 +244,7 @@ public class OrchidDiseaseSystem : PlantDiseaseSystem {
             LastDiseaseCheck = DateTimeOffset.UtcNow;
         }
     }
-    
+
     /// <summary>
     /// Retrieves the names of all diseases.
     /// </summary>

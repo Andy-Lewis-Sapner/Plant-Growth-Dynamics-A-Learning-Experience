@@ -69,7 +69,7 @@ public class QuestManager : Singleton<QuestManager> {
     /// </summary>
     private void IndicateMissionsButton() {
         if (!missionsButton.TryGetComponent(out CanvasGroup canvasGroup)) return;
-        
+
         _missionsButtonSequence = DOTween.Sequence();
         _missionsButtonSequence.Append(canvasGroup.DOFade(0.5f, 0.5f)).Append(canvasGroup.DOFade(1f, 0.5f))
             .SetLoops(5);
@@ -186,12 +186,12 @@ public class QuestManager : Singleton<QuestManager> {
     private void UpdateMissionProgress(string missionId, int increment) {
         MissionData mission = Missions.Find(m => m.missionId == missionId);
         if (mission == null) return;
-        if (mission.type != "Permanent" && mission.completed) return; 
+        if (mission.type != "Permanent" && mission.completed) return;
 
         mission.currentProgress = Mathf.Min(mission.currentProgress + increment, mission.targetProgress);
         if (mission.currentProgress >= mission.targetProgress) {
             mission.completed = true;
-            if (!QuestUI.Instance.IsScreenOpen && mission.currentProgress == mission.targetProgress) 
+            if (!QuestUI.Instance.IsScreenOpen && mission.currentProgress == mission.targetProgress)
                 IndicateMissionsButton();
             OnMissionCompleted?.Invoke(this, mission);
         }
@@ -225,7 +225,8 @@ public class QuestManager : Singleton<QuestManager> {
 
         if (request.result != UnityWebRequest.Result.Success) yield break;
 
-        ClaimMissionResponse response = JsonConvert.DeserializeObject<ClaimMissionResponse>(request.downloadHandler.text);
+        ClaimMissionResponse response =
+            JsonConvert.DeserializeObject<ClaimMissionResponse>(request.downloadHandler.text);
         if (response.message == "Mission claimed") {
             InventoryManager.Instance.Points = response.points;
             MissionData updatedMission = response.mission;
@@ -238,6 +239,7 @@ public class QuestManager : Singleton<QuestManager> {
                 localMission.completed = updatedMission.completed;
                 OnMissionProgressUpdated?.Invoke(this, localMission);
             }
+
             QuestUI.Instance.ShowQuests(QuestUI.Instance.CurrentTab);
             StartCoroutine(DataManager.Instance.SaveGameCoroutine());
         }
@@ -249,7 +251,7 @@ public class QuestManager : Singleton<QuestManager> {
     /// <returns>Returns an IEnumerator to be used with Unity's coroutine system for asynchronous execution.</returns>
     public IEnumerator LoadMissions() {
         yield return new WaitUntil(() => DataManager.Instance.SessionToken != null);
-        
+
         using UnityWebRequest request = new UnityWebRequest(Constants.ServerEndpoints.MissionsEndpoint, "GET");
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Authorization", DataManager.Instance.SessionToken);
@@ -260,7 +262,7 @@ public class QuestManager : Singleton<QuestManager> {
             Debug.LogError($"Failed to load missions: {request.error}");
             yield break;
         }
-        
+
         Missions = JsonConvert.DeserializeObject<List<MissionData>>(request.downloadHandler.text);
         OnMissionProgressUpdated?.Invoke(this, null);
     }
@@ -301,4 +303,3 @@ public class QuestManager : Singleton<QuestManager> {
         public MissionData mission;
     }
 }
-

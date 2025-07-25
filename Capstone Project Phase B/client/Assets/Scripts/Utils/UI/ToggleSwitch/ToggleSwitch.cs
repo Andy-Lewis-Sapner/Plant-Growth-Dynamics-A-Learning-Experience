@@ -10,16 +10,17 @@ using UnityEngine.UI;
 /// A UI toggle switch with animated slider and event triggers.
 /// </summary>
 public class ToggleSwitch : SuperBehaviour, IPointerClickHandler {
-    [Header("Slider setup")] 
-    [SerializeField, Range(0f, 1f)] protected float sliderValue; // Current value of the slider
+    [Header("Slider setup")] [SerializeField, Range(0f, 1f)]
+    protected float sliderValue; // Current value of the slider
+
     [SerializeField] private Slider slider; // Slider component for toggle
 
-    [Header("Animation")] 
-    [SerializeField, Range(0f, 1f)] private float animationDuration = 0.25f; // Duration of toggle animation
+    [Header("Animation")] [SerializeField, Range(0f, 1f)]
+    private float animationDuration = 0.25f; // Duration of toggle animation
+
     [SerializeField] private AnimationCurve slideEase = AnimationCurve.EaseInOut(0, 0, 1, 1); // Animation easing curve
-    
-    [Header("Events")] 
-    [SerializeField] private UnityEvent onToggleOn; // Event triggered when toggled on
+
+    [Header("Events")] [SerializeField] private UnityEvent onToggleOn; // Event triggered when toggled on
     [SerializeField] private UnityEvent onToggleOff; // Event triggered when toggled off
 
     private Coroutine _animateSliderCoroutine; // Coroutine for slider animation
@@ -85,7 +86,7 @@ public class ToggleSwitch : SuperBehaviour, IPointerClickHandler {
     /// <param name="state">The new toggle state.</param>
     public void SetStateAndStartAnimation(bool state) {
         _currentValue = state;
-        
+
         if (_currentValue)
             onToggleOn?.Invoke();
         else

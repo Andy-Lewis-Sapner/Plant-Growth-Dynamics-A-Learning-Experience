@@ -41,7 +41,10 @@ public class ElephantEarDiseaseSystem : PlantDiseaseSystem {
     /// has currently been detected or applied.
     /// </summary>
     private new enum Disease : byte {
-        None, RootRot, LeafBlight, SpiderMites
+        None,
+        RootRot,
+        LeafBlight,
+        SpiderMites
     }
 
     /// <summary>
@@ -84,17 +87,17 @@ public class ElephantEarDiseaseSystem : PlantDiseaseSystem {
         if (moisture > RootRotMoistureThreshold && Random.value < 0.05f) {
             CurrentDisease = Disease.RootRot;
             DiseaseProgress = 0f;
-        }
-        else switch (humidity) {
-            case > LeafBlightHumidityThreshold when moisture > 60f && Random.value < 0.03f:
-                CurrentDisease = Disease.LeafBlight;
-                DiseaseProgress = 0f;
-                break;
-            case < SpiderMitesHumidityThreshold when Random.value < 0.04f:
-                CurrentDisease = Disease.SpiderMites;
-                DiseaseProgress = 0f;
-                break;
-        }
+        } else
+            switch (humidity) {
+                case > LeafBlightHumidityThreshold when moisture > 60f && Random.value < 0.03f:
+                    CurrentDisease = Disease.LeafBlight;
+                    DiseaseProgress = 0f;
+                    break;
+                case < SpiderMitesHumidityThreshold when Random.value < 0.04f:
+                    CurrentDisease = Disease.SpiderMites;
+                    DiseaseProgress = 0f;
+                    break;
+            }
     }
 
     /// <summary>
@@ -105,7 +108,7 @@ public class ElephantEarDiseaseSystem : PlantDiseaseSystem {
     /// </exception>
     public override void UpdateDiseaseProgress() {
         if (CurrentDisease == Disease.None) return;
-        
+
         float moisture = PlantWaterSystem.GetEffectiveMoisture();
         float humidity = PlantEnvironment.GetEffectiveHumidity();
 

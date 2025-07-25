@@ -7,11 +7,11 @@ using UnityEngine.UI;
 /// </summary>
 public class LoadingCircle : SuperBehaviour, IUpdateObserver {
     private const float RotateSpeed = 100f; // Speed of the loading circle rotation
-    
+
     [SerializeField] private RectTransform progressRect; // RectTransform for rotation
     [SerializeField] private Image loadingCircleImage; // Image for the loading circle
     [SerializeField] private Image progressImage; // Image for the progress fill
-    
+
     private Color _loadingCircleColorHidden; // Hidden color for loading circle
     private Color _loadingCircleColorVisible; // Visible color for loading circle
     private Color _progressColorHidden; // Hidden color for progress fill
@@ -22,7 +22,7 @@ public class LoadingCircle : SuperBehaviour, IUpdateObserver {
     /// </summary>
     private void Start() {
         PlantGrowthManager.Instance.OnAdvanceGrowthToggled += PlantsGrowthManagerOnAdvanceGrowthToggled;
-        
+
         SetColors();
         progressImage.color = _progressColorHidden;
         loadingCircleImage.color = _loadingCircleColorHidden;

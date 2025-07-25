@@ -46,7 +46,7 @@ public class GameManager : Singleton<GameManager> {
     /// <returns>An IEnumerator that performs asynchronous operations for loading the scene and initializing game components.</returns>
     private IEnumerator LoadGameScene(bool isNewRegistration) {
         if (isNewRegistration) {
-            yield return SceneManager.LoadSceneAsync(nameof(Scenes.AlienPlanetScene)); 
+            yield return SceneManager.LoadSceneAsync(nameof(Scenes.AlienPlanetScene));
         } else {
             yield return SceneManager.LoadSceneAsync(nameof(Scenes.GameScene));
             StartCoroutine(LocationManager.Instance.InitializeLocation());
@@ -67,7 +67,7 @@ public class GameManager : Singleton<GameManager> {
             SceneManager.LoadScene("mains_creen");
             yield break;
         }
-        
+
         yield return DataManager.Instance.LoadGameProgress();
         yield return new WaitUntil(() => EnvironmentManager.Instance.LoadedAllStates);
         yield return new WaitUntil(() => DataManager.Instance.InstantiatedAllPlants);

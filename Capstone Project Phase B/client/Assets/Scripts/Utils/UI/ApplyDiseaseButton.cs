@@ -3,7 +3,7 @@ using LoM.Super;
 
 public class ApplyDiseaseButton : SuperBehaviour {
     private const string OffsetFormat = "yyyy-MM-ddTHH:mm:ss.fffffffZ"; // ISO 8601
-    
+
     private string _diseaseName; // The name of the disease
     private PlantInstance _currentPlant; // The current plant
 

@@ -12,7 +12,7 @@ public class PlantInstance : SuperBehaviour {
     public PlantEnvironment PlantEnvironment { get; private set; } // Environment settings
     public PlantFertilizerSystem PlantFertilizerSystem { get; private set; } // Fertilizer system
     public bool IsPlanted { get; private set; } // Tracks if the plant is planted
-    
+
     private PlantableArea _plantableArea; // Associated plantable area
     private PlantData _plantData; // Data for the plant instance
 
@@ -61,7 +61,7 @@ public class PlantInstance : SuperBehaviour {
         PlantDiseaseSystem.ResetSystem();
         PlantFertilizerSystem.ResetSystem();
     }
-    
+
     /// <summary>
     /// Updates and returns the plant's data with current state.
     /// </summary>
@@ -71,7 +71,7 @@ public class PlantInstance : SuperBehaviour {
             plantId = Guid.NewGuid().ToString(),
             username = DataManager.Instance.LoggedInUsername
         };
-        
+
         _plantData.plantName = PlantGrowthCore.PlantName;
         _plantData.position = Vector3Data.FromVector3(transform.position);
         _plantData.plantableArea = _plantableArea.GetHierarchyPath();

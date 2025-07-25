@@ -34,8 +34,7 @@ public class QuestUI : UIScreen<QuestUI> {
         CurrentTab = type; // Update current tab type
 
         // Clear existing quest entries from the UI
-        foreach (QuestEntry questEntry in _questEntries) 
-            Destroy(questEntry.gameObject);
+        foreach (QuestEntry questEntry in _questEntries) Destroy(questEntry.gameObject);
         _questEntries.Clear();
 
         // Get list of missions of the requested type
@@ -53,8 +52,10 @@ public class QuestUI : UIScreen<QuestUI> {
     // Updates the UI for a specific quest
     private void UpdateQuestEntry(object sender, MissionData quest) {
         QuestEntry entry = _questEntries.Find(e => e.Quest.missionId == quest.missionId);
-        if (entry) entry.UpdateUI(quest);
-        else ShowQuests(CurrentTab);
+        if (entry)
+            entry.UpdateUI(quest);
+        else
+            ShowQuests(CurrentTab);
     }
 
     // Displays a fading notification on the screen
@@ -64,14 +65,14 @@ public class QuestUI : UIScreen<QuestUI> {
         // Animate text to fade in, wait, and fade out repeatedly
         Sequence sequence = DOTween.Sequence();
         sequence.Append(notificationText.DOFade(1f, 0.5f)) // Fade in
-                .AppendInterval(1f) // Stay visible
-                .Append(notificationText.DOFade(0f, 0.5f)) // Fade out
-                .SetLoops(5); // Repeat 5 times
+            .AppendInterval(1f) // Stay visible
+            .Append(notificationText.DOFade(0f, 0.5f)) // Fade out
+            .SetLoops(5); // Repeat 5 times
     }
 
     // Unsubscribe from events
     private void OnDestroy() {
         QuestManager.Instance.OnMissionProgressUpdated -= UpdateQuestEntry;
-        QuestManager.Instance.OnMissionCompleted -= QuestManagerMissionCompleted; 
+        QuestManager.Instance.OnMissionCompleted -= QuestManagerMissionCompleted;
     }
 }

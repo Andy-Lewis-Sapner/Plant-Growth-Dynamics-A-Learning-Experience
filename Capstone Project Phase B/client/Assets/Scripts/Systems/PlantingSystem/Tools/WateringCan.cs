@@ -7,7 +7,9 @@ using UnityEngine.InputSystem;
 /// Manages a watering can for watering plants with camera control and particle effects.
 /// </summary>
 public class WateringCan : SuperBehaviour, IUpdateObserver {
-    private readonly Quaternion _fixedCameraRotation = Quaternion.Euler(90f, 0f, 0f); // Fixed camera rotation for overhead view
+    private readonly Quaternion
+        _fixedCameraRotation = Quaternion.Euler(90f, 0f, 0f); // Fixed camera rotation for overhead view
+
     private const float RotationSpeed = 200f; // Speed of can rotation
     private const float MoveSpeed = 2f; // Speed of can movement
     private const float TiltThreshold = 30f; // Angle threshold for pouring
@@ -26,7 +28,7 @@ public class WateringCan : SuperBehaviour, IUpdateObserver {
     private Quaternion _originalCameraRotation; // Stores original camera rotation
     private PlantableArea _plantableArea; // Associated plantable area
     private Collider _groundCollider; // Collider for ground bounds
-    
+
     /// <summary>
     /// Initializes position, camera, and deactivates the can on awake.
     /// </summary>
@@ -43,12 +45,12 @@ public class WateringCan : SuperBehaviour, IUpdateObserver {
         _groundCollider = area.GetComponent<Collider>();
         _plantableArea = area;
         if (_isActive) return;
-        
+
         _isActive = true;
         UIManager.Instance.ActivityState = true;
         transform.position += _wateringCanOffset;
         gameObject.SetActive(true);
-        
+
         float modifier = area.Environment switch {
             Environment.Ground => 1f,
             _ => 0.75f
@@ -58,7 +60,7 @@ public class WateringCan : SuperBehaviour, IUpdateObserver {
         GuidePanelUI.Instance.SetToolGuideActive(PlayerItem.WateringCan, true);
         GuidePanelUI.Instance.SetMoisture(area.PlantInstance.PlantWaterSystem.MoistureLevel);
     }
-    
+
     /// <summary>
     /// Deactivates the can, resets UI and player states, and stops pouring on cancel.
     /// </summary>
@@ -66,11 +68,11 @@ public class WateringCan : SuperBehaviour, IUpdateObserver {
     private void OnCancel(InputAction.CallbackContext obj) {
         InputManager.Instance.CancelInputAction.performed -= OnCancel;
         if (!_isActive) return;
-        
+
         _isActive = false;
         UIManager.Instance.ActivityState = false;
         gameObject.SetActive(false);
-        
+
         Player.Instance.DisableMovement = false;
         ResetCamera();
         GuidePanelUI.Instance.SetToolGuideActive(PlayerItem.WateringCan, false);
@@ -79,7 +81,7 @@ public class WateringCan : SuperBehaviour, IUpdateObserver {
             waterParticles.Stop();
             _isPouring = false;
         }
-        
+
         PlayerToolManager.Instance.ResetTool();
     }
 
@@ -119,7 +121,7 @@ public class WateringCan : SuperBehaviour, IUpdateObserver {
                 _isPouring = false;
                 break;
         }
-        
+
         UpdateOverheadCamera(modifier);
     }
 
@@ -153,7 +155,7 @@ public class WateringCan : SuperBehaviour, IUpdateObserver {
                 CameraTransitionDuration).SetEase(Ease.OutQuad)
             .OnComplete(() => InputManager.Instance.CancelInputAction.performed += OnCancel);
     }
-    
+
     /// <summary>
     /// Updates the camera to follow the can in overhead view.
     /// </summary>

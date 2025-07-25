@@ -29,6 +29,7 @@ public class UIScreenFader : SuperBehaviour {
             gameObject.SetActive(fadeIn);
             return;
         }
+
         if (Mathf.Approximately(_canvasGroup.alpha, fadeIn ? 1f : 0f)) return;
 
         if (fadeIn)

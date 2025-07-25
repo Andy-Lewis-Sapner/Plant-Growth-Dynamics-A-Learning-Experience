@@ -12,7 +12,9 @@ using Random = UnityEngine.Random;
 // Manages the plant statistics and weather forecast UI screen
 public class StatisticsScreenUI : UIScreen<StatisticsScreenUI> {
     private static readonly Dictionary<string, Sprite> IconCache = new(); // Cache for weather icons
-    private readonly StringBuilder _currentWeatherData = new(StringBuilderCapacity); // Used to build current weather string
+
+    private readonly StringBuilder
+        _currentWeatherData = new(StringBuilderCapacity); // Used to build current weather string
 
     private const int WeatherForecastHoursDifference = 2; // Hours between weather forecast points
     private const char DegreeSymbol = '\u00b0'; // Symbol for temperature
@@ -22,15 +24,17 @@ public class StatisticsScreenUI : UIScreen<StatisticsScreenUI> {
     private const int StringBuilderCapacity = 100; // Initial capacity for weather string builder
     private const string NoDisease = "None"; // Constant representing no disease state
 
-    [Header("Statistics Section")] 
-    [SerializeField] private TypeWriterEffect plantName; // Displays plant name
+    [Header("Statistics Section")] [SerializeField]
+    private TypeWriterEffect plantName; // Displays plant name
+
     [SerializeField] private TextMeshProUGUI moistureLevel; // Displays current moisture level
     [SerializeField] private TextMeshProUGUI nutrientLevel; // Displays current nutrient level
     [SerializeField] private TextMeshProUGUI plantDiseases; // Displays plant disease information
     [SerializeField] private TypeWriterEffect plantRecommendations; // Displays plant care recommendations
 
-    [Header("Weather Section")] 
-    [SerializeField] private Image[] forecastIcons; // Icons for upcoming weather forecasts
+    [Header("Weather Section")] [SerializeField]
+    private Image[] forecastIcons; // Icons for upcoming weather forecasts
+
     [SerializeField] private TypeWriterEffect[] forecastHours; // Hours for each forecast
     [SerializeField] private TypeWriterEffect[] forecastTemperatures; // Temperatures for each forecast
     [SerializeField] private TypeWriterEffect currentWeather; // Current weather details

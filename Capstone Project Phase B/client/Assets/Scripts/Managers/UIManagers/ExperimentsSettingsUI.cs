@@ -6,9 +6,10 @@ public class ExperimentsSettingsUI : Singleton<ExperimentsSettingsUI> {
     [SerializeField] private TMP_InputField timeInput; // Input field for entering the amount of time to advance
     [SerializeField] private TMP_Dropdown unitDropdown; // Dropdown for selecting the unit (seconds, hours, days)
     [SerializeField] private Button advanceGrowthButton;
-    
-    [Header("Audio Settings")]
-    [SerializeField] private Slider musicVolumeSlider;
+
+    [Header("Audio Settings")] [SerializeField]
+    private Slider musicVolumeSlider;
+
     [SerializeField] private TextMeshProUGUI musicVolumeText;
     [SerializeField] private Slider environmentVolumeSlider;
     [SerializeField] private TextMeshProUGUI environmentVolumeText;
@@ -26,11 +27,11 @@ public class ExperimentsSettingsUI : Singleton<ExperimentsSettingsUI> {
         int musicVolume = (int)(AudioManager.Instance.BackgroundMusicVolume * 100f);
         musicVolumeText.text = $"{musicVolume}%";
         musicVolumeSlider.value = musicVolume;
-        
+
         int environmentVolume = (int)(AudioManager.Instance.EnvironmentVolume * 100f);
         environmentVolumeText.text = $"{environmentVolume}%";
         environmentVolumeSlider.value = environmentVolume;
-        
+
         int soundEffectsVolume = (int)(AudioManager.Instance.SoundEffectsVolume * 100f);
         soundEffectsVolumeText.text = $"{soundEffectsVolume}%";
         soundEffectsVolumeSlider.value = soundEffectsVolume;
@@ -41,7 +42,7 @@ public class ExperimentsSettingsUI : Singleton<ExperimentsSettingsUI> {
         AudioManager.Instance.BackgroundMusicVolume = musicVolumeSlider.value / 100f;
         musicVolumeText.text = $"{musicVolumeSlider.value}%";
     }
-    
+
     // Called when the environment volume slider is changed
     public void OnEnvironmentVolumeSliderChanged() {
         AudioManager.Instance.EnvironmentVolume = environmentVolumeSlider.value / 100f;
@@ -70,9 +71,9 @@ public class ExperimentsSettingsUI : Singleton<ExperimentsSettingsUI> {
 
         // Convert the entered time into seconds based on selected unit
         float seconds = unitDropdown.value switch {
-            0 => value,              // Seconds
-            1 => value * 3600f,      // Hours
-            2 => value * 86400f,     // Days
+            0 => value, // Seconds
+            1 => value * 3600f, // Hours
+            2 => value * 86400f, // Days
             _ => value
         };
 

@@ -9,8 +9,7 @@ public class PlantSO : ScriptableObject {
     /// <summary>
     /// Represents the name of the plant.
     /// </summary>
-    [Header("Plant Generic Data")]
-    public string plantName;
+    [Header("Plant Generic Data")] public string plantName;
 
     /// <summary>
     /// Prefab representing the visual and interactive representation of a plant in the game.
@@ -28,8 +27,8 @@ public class PlantSO : ScriptableObject {
     /// A brief descriptive summary about the plant, providing important details
     /// such as characteristics, features, and general information.
     /// </summary>
-    [Header("Plant Details")]
-    [TextArea(8, 10)] public string briefDescription;
+    [Header("Plant Details")] [TextArea(8, 10)]
+    public string briefDescription;
 
     /// <summary>
     /// A list of growing recommendations, providing guidance or tips for optimal growth of a plant.
@@ -41,8 +40,7 @@ public class PlantSO : ScriptableObject {
     /// <summary>
     /// Represents the optimal moisture level required for the healthy growth of a plant.
     /// </summary>
-    [Header("Plant Growth")]
-    public float optimalMoistureLevel = 70f;
+    [Header("Plant Growth")] public float optimalMoistureLevel = 70f;
 
     /// <summary>
     /// Represents the acceptable range of moisture variation for a plant, centered around the optimal moisture level.
@@ -52,8 +50,7 @@ public class PlantSO : ScriptableObject {
     /// <summary>
     /// Specifies the type of fertilizer that is most suitable or optimal for the plant's growth.
     /// </summary>
-    [Header("Fertilizer Details")] 
-    public FertilizerSO.FertilizerType preferredFertilizerType;
+    [Header("Fertilizer Details")] public FertilizerSO.FertilizerType preferredFertilizerType;
 
     /// <summary>
     /// Represents the growth boost factor provided by applying fertilizer
@@ -122,8 +119,8 @@ public class PlantSO : ScriptableObject {
     /// The relative importance assigned to temperature when calculating growth modifiers for a plant.
     /// Ranges between 0.0 and 1.0, where 0.0 indicates no impact and 1.0 indicates maximum impact.
     /// </summary>
-    [Header("Growth Weights")]
-    [Range(0f, 1f)] public float temperatureWeight = 0.25f;
+    [Header("Growth Weights")] [Range(0f, 1f)]
+    public float temperatureWeight = 0.25f;
 
     /// <summary>
     /// Represents the weight of humidity in the plant's growth calculation.
@@ -147,8 +144,7 @@ public class PlantSO : ScriptableObject {
     /// <summary>
     /// Represents location-specific details for plant growth when the plant is grown in ground environments.
     /// </summary>
-    [Header("Location Specific Data")] 
-    public PlantLocationDetails groundDetails;
+    [Header("Location Specific Data")] public PlantLocationDetails groundDetails;
 
     /// <summary>
     /// Provides specific environmental data and requirements for the growth of plants within a house environment.

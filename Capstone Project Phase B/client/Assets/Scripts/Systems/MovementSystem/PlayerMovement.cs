@@ -69,9 +69,15 @@ public class PlayerMovement : SuperBehaviour, IUpdateObserver {
     private void Start() {
         _isGameScene = SceneManager.GetActiveScene().name == nameof(Scenes.GameScene);
         if (_isGameScene) {
-            _xMinBoundary = 500f; _xMaxBoundary = 600f; _zMinBoundary = 475f; _zMaxBoundary = 575f;
+            _xMinBoundary = 500f;
+            _xMaxBoundary = 600f;
+            _zMinBoundary = 475f;
+            _zMaxBoundary = 575f;
         } else {
-            _xMinBoundary = 5f; _xMaxBoundary = 195f; _zMinBoundary = 5f; _zMaxBoundary = 195f;
+            _xMinBoundary = 5f;
+            _xMaxBoundary = 195f;
+            _zMinBoundary = 5f;
+            _zMaxBoundary = 195f;
         }
     }
 
@@ -98,7 +104,7 @@ public class PlayerMovement : SuperBehaviour, IUpdateObserver {
     /// Movement is executed using a CharacterController component.
     private void HandleMovement() {
         if (_isGrounded && _velocity.y < 0) _velocity.y = 0f;
-        
+
         Vector2 moveInput = InputManager.Instance.MoveInput;
         Vector3 move = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized * MoveSpeed;
 

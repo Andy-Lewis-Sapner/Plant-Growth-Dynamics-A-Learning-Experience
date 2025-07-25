@@ -37,7 +37,7 @@ public class DrainageShovel : SuperBehaviour, IUpdateObserver {
     /// Specifies the LayerMask representing the ground layer for interaction or detection purposes.
     /// </summary>
     [SerializeField] private LayerMask groundLayer;
-    
+
     /// <summary>
     /// Audio source for the shovel's digging sound effect.
     /// </summary>
@@ -90,7 +90,7 @@ public class DrainageShovel : SuperBehaviour, IUpdateObserver {
         transform.localEulerAngles = new Vector3(-20, transform.localEulerAngles.y, transform.localEulerAngles.z);
         _shovelRigidbody = GetComponent<Rigidbody>();
         _shovelRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-        
+
         gameObject.SetActive(false);
         digParticles?.Stop();
     }
@@ -145,7 +145,7 @@ public class DrainageShovel : SuperBehaviour, IUpdateObserver {
 
         float cameraSideOffset = modifier * CameraSideOffset;
         float cameraHeight = modifier * CameraHeight;
-        
+
         float absX = Mathf.Abs(relativePosition.x);
         float absZ = Mathf.Abs(relativePosition.z);
 
@@ -179,11 +179,11 @@ public class DrainageShovel : SuperBehaviour, IUpdateObserver {
         InputManager.Instance.CancelInputAction.performed -= OnCancel;
         InputManager.Instance.AttackInputAction.performed -= TriggerDigEffect;
         ResetCamera();
-        
+
         if (!_isActive) return;
         _isActive = false;
         gameObject.SetActive(false);
-        
+
         Player.Instance.DisableMovement = false;
         UIManager.Instance.ActivityState = false;
         MouseMovement.Instance.UpdateCursorSettings(false);
@@ -208,7 +208,7 @@ public class DrainageShovel : SuperBehaviour, IUpdateObserver {
             _groundExtents = groundCollider.bounds.extents;
             _groundHeight = groundCollider.bounds.max.y;
         }
-        
+
         float modifier = area.Environment switch {
             Environment.Ground => 1f,
             Environment.GreenHouse => 0.5f,
@@ -216,15 +216,15 @@ public class DrainageShovel : SuperBehaviour, IUpdateObserver {
             _ => 1f
         };
         SetSideCamera(modifier);
-        
+
         _isActive = true;
         gameObject.SetActive(true);
-        
+
         Player.Instance.DisableMovement = true;
         UIManager.Instance.ActivityState = true;
         MouseMovement.Instance.UpdateCursorSettings(true);
         GuidePanelUI.Instance.SetToolGuideActive(PlayerItem.DrainageShovel, true);
-        
+
         InputManager.Instance.AttackInputAction.performed += TriggerDigEffect;
     }
 
@@ -237,16 +237,14 @@ public class DrainageShovel : SuperBehaviour, IUpdateObserver {
         Sequence digSequence = DOTween.Sequence();
         digSequence.Append(transform
             .DOLocalRotate(new Vector3(0f, transform.localEulerAngles.y, transform.localEulerAngles.z), 0.2f)
-            .SetEase(Ease.InOutQuad).OnStart(() => {
-                StartCoroutine(AllowAnimation());
-            }));
-        
+            .SetEase(Ease.InOutQuad).OnStart(() => { StartCoroutine(AllowAnimation()); }));
+
         digSequence.Append(transform
             .DOLocalRotate(new Vector3(-50f, transform.localEulerAngles.y, transform.localEulerAngles.z), 0.3f)
             .SetEase(Ease.InOutQuad).OnComplete(() => _isAnimating = false));
-        
+
         digSequence.AppendInterval(0.2f);
-        
+
         digSequence.Append(transform
             .DOLocalRotate(new Vector3(-20f, transform.localEulerAngles.y, transform.localEulerAngles.z), 0.3f)
             .SetEase(Ease.InOutQuad).OnComplete(() => {

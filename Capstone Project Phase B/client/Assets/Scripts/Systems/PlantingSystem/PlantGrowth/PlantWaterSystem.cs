@@ -79,7 +79,7 @@ public class PlantWaterSystem : SuperBehaviour {
         PlantLocationDetails details = _plantEnvironment.GetLocationDetails();
         float minHumidity = details?.minimalHumidity ?? _plantGrowth.PlantSo.defaultMinimalHumidity;
         float maxHumidity = details?.maximalHumidity ?? _plantGrowth.PlantSo.defaultMaximalHumidity;
-        
+
         float humidityContribution = Mathf.InverseLerp(minHumidity, maxHumidity, effectiveHumidity);
         return Mathf.Clamp(MoistureLevel + humidityContribution * 20f, 0f, 100f);
     }

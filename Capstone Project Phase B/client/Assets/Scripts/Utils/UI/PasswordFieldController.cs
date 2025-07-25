@@ -22,9 +22,8 @@ public class PasswordFieldController : SuperBehaviour {
     private void Awake() {
         _inputField = GetComponent<TMP_InputField>();
         _eyeButton = GetComponentInChildren<Button>();
-        if (_eyeButton)
-            _eyeButton.onClick.AddListener(TogglePasswordVisibility);
-        
+        if (_eyeButton) _eyeButton.onClick.AddListener(TogglePasswordVisibility);
+
         _inputField.contentType = TMP_InputField.ContentType.Password;
         _inputField.asteriskChar = '•';
         _inputField.ForceLabelUpdate();
@@ -36,7 +35,8 @@ public class PasswordFieldController : SuperBehaviour {
     /// </summary>
     private void TogglePasswordVisibility() {
         _showPassword = !_showPassword;
-        _inputField.contentType = _showPassword ? TMP_InputField.ContentType.Standard : TMP_InputField.ContentType.Password;
+        _inputField.contentType =
+            _showPassword ? TMP_InputField.ContentType.Standard : TMP_InputField.ContentType.Password;
         _inputField.ForceLabelUpdate();
         _eyeButton.image.sprite = _showPassword ? closedEyeSprite : openEyeSprite;
     }

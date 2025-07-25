@@ -48,8 +48,9 @@ public class MissionManager : Singleton<MissionManager>, IUpdateObserver {
             AudioManager.Instance.PlayMusicBasedOnScene(SceneManager.GetActiveScene());
         });
     }
-    
-    public void ObservedUpdate() { // Called every frame by UpdateManager
+
+    public void ObservedUpdate() {
+        // Called every frame by UpdateManager
         if (CurrentCheckpoint >= missionData.checkpoints.Length) return;
         // Move NPC to current checkpoint
         if (_isMovingToCheckpoint && npcAgent.isOnNavMesh) {
@@ -58,27 +59,30 @@ public class MissionManager : Singleton<MissionManager>, IUpdateObserver {
             float distanceSqr = (npcAgent.transform.position - _targetPosition).sqrMagnitude;
 
             if (distanceSqr > _npcStoppingDistanceSqr) {
-                npcAnimator.SetFloat(SpeedFloat, 1f);// Play walk animation
+                npcAnimator.SetFloat(SpeedFloat, 1f); // Play walk animation
             } else {
-                npcAnimator.SetFloat(SpeedFloat, 0f);// Stop animation
+                npcAnimator.SetFloat(SpeedFloat, 0f); // Stop animation
                 _isMovingToCheckpoint = false;
                 _isWaitingForInteraction = true;
             }
         }
 
-        if (!_isMovingToCheckpoint)// Smoothly rotate NPC to face the target
+        if (!_isMovingToCheckpoint) // Smoothly rotate NPC to face the target
             SmoothLookAt(
-                CurrentCheckpoint >= 0 && missionData.checkpoints[CurrentCheckpoint].action == DialogueMissionData.CheckpointAction.CameraFocus &&
+                CurrentCheckpoint >= 0 && missionData.checkpoints[CurrentCheckpoint].action ==
+                DialogueMissionData.CheckpointAction.CameraFocus &&
                 missionData.checkpoints[CurrentCheckpoint].isTeacherTarget
                     ? teacherNpc.transform
                     : Player.Instance.transform);
     }
 
-    public void StartMission() { // Begins the mission
+    public void StartMission() {
+        // Begins the mission
         MissionStarted = true;
         npcAgent.isStopped = true;
         missionText.text = string.Empty;
-        if (missionData.initialDialogue.Length > 0) {// Start with initial dialogue if available
+        if (missionData.initialDialogue.Length > 0) {
+            // Start with initial dialogue if available
             DialogueUI.Instance.ShowDialogue(missionData.initialDialogue);
         } else {
             CurrentCheckpoint = 0;
@@ -86,7 +90,8 @@ public class MissionManager : Singleton<MissionManager>, IUpdateObserver {
         }
     }
 
-    private void HandleDialogueEnd(object sender, EventArgs e) {// Called when a dialogue finishes
+    private void HandleDialogueEnd(object sender, EventArgs e) {
+        // Called when a dialogue finishes
         npcAgent.isStopped = false;
         // End any active camera focus
         if (_isActionActive) {
@@ -98,6 +103,7 @@ public class MissionManager : Singleton<MissionManager>, IUpdateObserver {
                 _isActionActive = false;
             }
         }
+
         // Move to the next checkpoint or activate the guide if it's the last one
         if (CurrentCheckpoint < missionData.checkpoints.Length - 1) {
             CurrentCheckpoint++;
@@ -107,14 +113,16 @@ public class MissionManager : Singleton<MissionManager>, IUpdateObserver {
             if (checkpoint.action == DialogueMissionData.CheckpointAction.ActivateGuide) visualGuide.ActivateGuide();
         }
     }
-    
-    public void OnNpcInteracted() {// Called when player interacts with the NPC
+
+    public void OnNpcInteracted() {
+        // Called when player interacts with the NPC
         if (!_isWaitingForInteraction) return;
         _isWaitingForInteraction = false;
         ExecuteCheckpointAction();
     }
-    
-    private void ExecuteCheckpointAction() {  // Executes the logic defined in the current checkpoint
+
+    private void ExecuteCheckpointAction() {
+        // Executes the logic defined in the current checkpoint
         npcAgent.isStopped = true;
         DialogueMissionData.Checkpoint checkpoint = missionData.checkpoints[CurrentCheckpoint];
 
@@ -133,12 +141,12 @@ public class MissionManager : Singleton<MissionManager>, IUpdateObserver {
                     _teacherAnimator?.SetBool(checkpoint.animatorBool, true);
                 SmoothLookAt(teacherNpc ? teacherNpc.transform : Player.Instance.transform);
                 FocusCameraOnTarget(teacherNpc.transform);
-                
-                if (checkpoint.dialogueLines.Length > 0) 
+
+                if (checkpoint.dialogueLines.Length > 0)
                     DialogueUI.Instance.ShowDialogue(checkpoint.dialogueLines);
-                else 
+                else
                     HandleDialogueEnd(this, EventArgs.Empty);
-                
+
                 break;
             case DialogueMissionData.CheckpointAction.ActivateGuide:
                 if (checkpoint.dialogueLines.Length > 0) {
@@ -146,13 +154,15 @@ public class MissionManager : Singleton<MissionManager>, IUpdateObserver {
                 } else {
                     HandleDialogueEnd(this, EventArgs.Empty);
                 }
+
                 break;
         }
     }
 
-    private void SmoothLookAt(Transform target) { // Smoothly rotates the NPC to face a target
+    private void SmoothLookAt(Transform target) {
+        // Smoothly rotates the NPC to face a target
         if (!target) return;
-        
+
         Vector3 directionToTarget = (target.position - npcAgent.transform.position).normalized;
         directionToTarget.y = 0;
         if (directionToTarget != Vector3.zero) {
@@ -162,9 +172,10 @@ public class MissionManager : Singleton<MissionManager>, IUpdateObserver {
         }
     }
 
-    private void FocusCameraOnTarget(Transform target) {// Smoothly rotates the camera to face a target
+    private void FocusCameraOnTarget(Transform target) {
+        // Smoothly rotates the camera to face a target
         if (!target) return;
-        
+
         _originalCameraRotation = playerCamera.transform.rotation;
         Vector3 directionToTarget = (target.transform.position - playerCamera.transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
@@ -172,15 +183,18 @@ public class MissionManager : Singleton<MissionManager>, IUpdateObserver {
             Quaternion.Slerp(playerCamera.transform.rotation, lookRotation, 5f * Time.deltaTime);
     }
 
-    private void ResetCamera() {// Resets the camera to its original rotation
+    private void ResetCamera() {
+        // Resets the camera to its original rotation
         playerCamera.transform.rotation = _originalCameraRotation;
     }
 
     private void OnEnable() => UpdateManager.RegisterObserver(this); // Registers this object to receive update events
-    private void OnDisable() => UpdateManager.UnregisterObserver(this); // Unregisters this object from receiving update events
 
-    private void OnDestroy() {  // Cleans up event subscriptions on destruction
+    private void OnDisable() =>
+        UpdateManager.UnregisterObserver(this); // Unregisters this object from receiving update events
+
+    private void OnDestroy() {
+        // Cleans up event subscriptions on destruction
         DialogueUI.Instance.OnDialogueEnd -= HandleDialogueEnd;
     }
 }
-

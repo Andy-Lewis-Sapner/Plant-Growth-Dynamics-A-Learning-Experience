@@ -8,7 +8,7 @@ using SimpleFileBrowser;
 public class FileBrowserManager : Singleton<FileBrowserManager> {
     private static readonly Vector2 CenterPivot = new(0.5f, 0.5f); // Pivot point for sprite creation
     [SerializeField] private Sprite defaultSprite; // Default sprite for image display
-    
+
     /// Configures the file browser with specific filters and default settings.
     /// This method is invoked to set up the file browser parameters. It includes:
     /// - Defining file type filters for images (e.g., `.jpg`, `.png`) and text files (e.g., `.txt`, `.pdf`).
@@ -20,7 +20,7 @@ public class FileBrowserManager : Singleton<FileBrowserManager> {
         FileBrowser.SetFilters(true,
             new FileBrowser.Filter("Images", ".jpg", ".png"),
             new FileBrowser.Filter("Text Files", ".txt", ".pdf"));
-        
+
         FileBrowser.SetDefaultFilter(".jpg");
         FileBrowser.SetExcludedExtensions(".lnk", ".tmp", ".zip", ".rar", ".exe");
         FileBrowser.AddQuickLink("Users", "C:\\Users");
@@ -50,9 +50,8 @@ public class FileBrowserManager : Singleton<FileBrowserManager> {
         Sprite imageSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), CenterPivot);
         imageSprite.name = "plantSprite";
 
-        if (imageData.Length == 0 || !success || !imageSprite) 
-            imageSprite = defaultSprite;
-        
+        if (imageData.Length == 0 || !success || !imageSprite) imageSprite = defaultSprite;
+
         switch (identificationType) {
             case IdentificationType.IdentifyDisease:
                 UploadingDiseaseUI.Instance.SetPlantImage(imageSprite);

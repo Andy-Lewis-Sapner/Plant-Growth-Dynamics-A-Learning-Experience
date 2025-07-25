@@ -43,7 +43,7 @@ public class TypeWriterEffect : SuperBehaviour, IPointerClickHandler {
         _typingTween?.Kill();
         _tmpText.text = string.Empty;
         if (string.IsNullOrEmpty(_text)) return;
-        
+
         float duration = _text.Length * TypingSpeed;
         float counter = 0f;
         char[] textChars = _text.ToCharArray();

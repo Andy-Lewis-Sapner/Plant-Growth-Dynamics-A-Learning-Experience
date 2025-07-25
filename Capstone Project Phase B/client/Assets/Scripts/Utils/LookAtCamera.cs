@@ -11,10 +11,13 @@ public class LookAtCamera : SuperBehaviour {
     private enum Mode {
         /// <summary>Object looks directly at the camera.</summary>
         LookAt,
+
         /// <summary>Object looks directly away from the camera.</summary>
         LookAtInverted,
+
         /// <summary>Object aligns its forward direction with the camera's forward direction.</summary>
         CameraForward,
+
         /// <summary>Object aligns its forward direction opposite to the camera's forward direction.</summary>
         CameraForwardInverted,
     }

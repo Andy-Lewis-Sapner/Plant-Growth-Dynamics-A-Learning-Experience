@@ -12,12 +12,12 @@ public class SprayBottle : SuperBehaviour, IUpdateObserver {
     private const float CameraTransitionDuration = 0.5f; // Duration for camera transitions
     private const float CameraSideOffset = 2f; // Camera offset from plantable area
     private const float CameraHeight = 1f; // Camera height above plantable area
-    
+
     public PlayerItem CurrentSpray { get; private set; } // Current spray item
     [SerializeField] private ParticleSystem sprayingEffect; // Particle system for spray effect
     [SerializeField] private AudioSource sprayAudio; // Audio source for spray sound
     public ParticleSystem SprayingEffect => sprayingEffect; // Public accessor for spraying effect
-    
+
     private bool _isActive; // Tracks if the spray bottle is active
     private Quaternion _originalCameraRotation; // Stores original camera rotation
     private Camera _mainCamera; // Reference to main camera
@@ -31,7 +31,7 @@ public class SprayBottle : SuperBehaviour, IUpdateObserver {
         _mainCamera = Camera.main;
         gameObject.SetActive(false);
     }
-    
+
     /// <summary>
     /// Updates spray bottle position and rotation based on mouse and input.
     /// </summary>
@@ -85,11 +85,11 @@ public class SprayBottle : SuperBehaviour, IUpdateObserver {
             _ => 1f
         };
         SetSideCamera(modifier);
-        
+
         _isActive = true;
         gameObject.SetActive(true);
         CurrentSpray = playerItem;
-        
+
         Player.Instance.DisableMovement = true;
         UIManager.Instance.ActivityState = true;
         MouseMovement.Instance.UpdateCursorSettings(true);
@@ -102,7 +102,7 @@ public class SprayBottle : SuperBehaviour, IUpdateObserver {
     /// <param name="obj">Input action context.</param>
     private void TriggerSprayEffect(InputAction.CallbackContext obj) {
         if (!_isActive) return;
-        
+
         sprayingEffect.Stop();
         ParticleSystem.MainModule main = sprayingEffect.main;
 
@@ -111,22 +111,22 @@ public class SprayBottle : SuperBehaviour, IUpdateObserver {
                 main.startColor = new Color(0.6f, 0.8f, 0.6f, 0.5f);
                 main.gravityModifier = 0.1f;
                 break;
-            
+
             case PlayerItem.InsecticideSoap:
                 main.startColor = new Color(0.9f, 0.9f, 1f, 0.6f);
                 main.gravityModifier = 0.05f;
                 break;
-            
+
             case PlayerItem.NeemOil:
                 main.startColor = new Color(0.439f, 0.631f, 0.176f, 0.7f);
                 main.gravityModifier = 0.4f;
                 break;
         }
-        
+
         sprayingEffect.Play();
         AudioManager.Instance.PlaySoundEffect(AudioManager.SoundID.Spray, sprayAudio);
     }
-    
+
     /// <summary>
     /// Clamps the spray position to the ground collider bounds.
     /// </summary>
@@ -135,14 +135,14 @@ public class SprayBottle : SuperBehaviour, IUpdateObserver {
     private Vector3 ClampToGroundBounds(Vector3 position) {
         Vector3 groundCenter = _groundCollider.bounds.center;
         Vector3 groundExtents = _groundCollider.bounds.extents;
-        
+
         position.x = Mathf.Clamp(position.x, groundCenter.x - groundExtents.x, groundCenter.x + groundExtents.x);
         position.z = Mathf.Clamp(position.z, groundCenter.z - groundExtents.z, groundCenter.z + groundExtents.z);
         position.y = _groundCollider.transform.position.y;
 
         return position;
     }
-    
+
     /// <summary>
     /// Deactivates the spray bottle and resets UI and player states on cancel.
     /// </summary>
@@ -150,11 +150,11 @@ public class SprayBottle : SuperBehaviour, IUpdateObserver {
     private void OnCancel(InputAction.CallbackContext obj) {
         InputManager.Instance.CancelInputAction.performed -= OnCancel;
         ResetCamera();
-        
+
         if (!_isActive) return;
         _isActive = false;
         gameObject.SetActive(false);
-        
+
         Player.Instance.DisableMovement = false;
         UIManager.Instance.ActivityState = false;
         MouseMovement.Instance.UpdateCursorSettings(false);
@@ -178,7 +178,7 @@ public class SprayBottle : SuperBehaviour, IUpdateObserver {
 
         float cameraSideOffset = modifier * CameraSideOffset;
         float cameraHeight = modifier * CameraHeight;
-        
+
         float absX = Mathf.Abs(relativePosition.x);
         float absZ = Mathf.Abs(relativePosition.z);
 

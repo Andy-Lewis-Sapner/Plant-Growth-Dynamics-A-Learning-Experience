@@ -17,7 +17,7 @@ public class UploadingDiseaseUI : UIScreen<UploadingDiseaseUI> {
 
     // Initializes the screen by getting the RectTransform of the disease buttons container
     protected override void InitializeScreen() {
-        diseaseButtonsContainer.transform.TryGetComponent(out _diseaseButtonsContainerRectTransform); 
+        diseaseButtonsContainer.transform.TryGetComponent(out _diseaseButtonsContainerRectTransform);
     }
 
     // Creates disease buttons based on the given probabilities
@@ -27,7 +27,7 @@ public class UploadingDiseaseUI : UIScreen<UploadingDiseaseUI> {
         explanationText.gameObject.SetActive(true);
         EmptyButtonsContainer();
         diseaseButtonsContainer.startAxis = GridLayoutGroup.Axis.Vertical;
-        
+
         // Sort diseases by probability
         string[] diseases = PlantDiseaseIdentifier.DiseaseLabels;
         List<DiseaseProbability> diseaseProbabilities = probabilities
@@ -47,7 +47,7 @@ public class UploadingDiseaseUI : UIScreen<UploadingDiseaseUI> {
             diseaseButton.transform.GetChild(0).TryGetComponent(out TextMeshProUGUI text);
             text.text =
                 $"{mappedDiseaseName.SeparateCamelCase()} ({sortedDiseaseProbabilities[i].probability * 100f:0}%)";
-            
+
             diseaseButton.SetActive(true);
         }
     }
@@ -75,7 +75,7 @@ public class UploadingDiseaseUI : UIScreen<UploadingDiseaseUI> {
             GameObject diseaseButton = Instantiate(diseaseButtonTemplate, _diseaseButtonsContainerRectTransform);
             diseaseButton.transform.TryGetComponent(out ApplyDiseaseButton applyDiseaseButton);
             applyDiseaseButton.SetProperties(disease, _currentPlant);
-            
+
             diseaseButton.transform.GetChild(0).TryGetComponent(out TextMeshProUGUI text);
             text.text = disease.SeparateCamelCase();
             diseaseButton.SetActive(true);

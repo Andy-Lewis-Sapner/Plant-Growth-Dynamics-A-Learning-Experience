@@ -12,8 +12,10 @@ public abstract class Singleton<T> : SuperBehaviour where T : Component {
     /// Initializes the singleton instance, destroying duplicates.
     /// </summary>
     protected virtual void Awake() {
-        if (Instance && Instance != this) Destroy(gameObject);
-        else Instance = this as T;
+        if (Instance && Instance != this)
+            Destroy(gameObject);
+        else
+            Instance = this as T;
         AfterAwake();
     }
 

@@ -35,10 +35,8 @@ public class UpdateManager : SuperBehaviour {
     /// </summary>
     private void Update() {
         CallObservedUpdates();
-        if (RemovedUpdateObservers.Count > 0)
-            RemoveUpdateObservers();
-        if (PendingUpdateObservers.Count > 0)
-            AddPendingObservers();
+        if (RemovedUpdateObservers.Count > 0) RemoveUpdateObservers();
+        if (PendingUpdateObservers.Count > 0) AddPendingObservers();
     }
 
     /// <summary>
@@ -47,8 +45,7 @@ public class UpdateManager : SuperBehaviour {
     /// respective update logic during the Update cycle.
     /// </summary>
     private static void CallObservedUpdates() {
-        foreach (IUpdateObserver updateObserver in UpdateObservers)
-            updateObserver.ObservedUpdate();
+        foreach (IUpdateObserver updateObserver in UpdateObservers) updateObserver.ObservedUpdate();
     }
 
     /// <summary>

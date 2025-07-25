@@ -122,7 +122,7 @@ public class EnvironmentManager : Singleton<EnvironmentManager>, IUpdateObserver
     public void ObservedUpdate() {
         _cacheTimer += Time.deltaTime;
         if (!(_cacheTimer >= CacheInterval)) return;
-        
+
         UpdateCache();
         _cacheTimer -= CacheInterval;
     }
@@ -152,7 +152,7 @@ public class EnvironmentManager : Singleton<EnvironmentManager>, IUpdateObserver
     /// </summary>
     private void UpdateCache() {
         if (WeatherManager.Instance.OpenMeteoHour == null) return;
-        
+
         _cachedOutdoorLight = GroundEnvironment.GetLightLevel();
         _cachedOutdoorHumidity = GroundEnvironment.GetHumidity();
         _cachedOutdoorTemperature = GroundEnvironment.GetTemperature();
@@ -230,7 +230,7 @@ public class EnvironmentManager : Singleton<EnvironmentManager>, IUpdateObserver
     /// <returns>A list of PlantInstance objects representing all active plants eligible for saving.</returns>
     public List<PlantInstance> GetAllPlantsForSaving() {
         List<PlantInstance> plantInstances = new List<PlantInstance>();
-        foreach (Transform plant in allGrowingPlants) 
+        foreach (Transform plant in allGrowingPlants)
             if (plant.TryGetComponent(out PlantInstance plantInstance))
                 plantInstances.Add(plantInstance);
 

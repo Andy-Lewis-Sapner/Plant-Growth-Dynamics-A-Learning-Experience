@@ -61,7 +61,7 @@ public class UIManager : Singleton<UIManager>, IUpdateObserver {
                                            StatisticsScreenUI.Instance.IsScreenOpen ||
                                            SelectLocationUI.Instance.IsScreenOpen ||
                                            PauseMenuUI.Instance.IsScreenOpen ||
-                                           ManageScreenUI.Instance.IsScreenOpen || 
+                                           ManageScreenUI.Instance.IsScreenOpen ||
                                            StoreMenuUI.Instance.IsScreenOpen ||
                                            QuestUI.Instance.IsScreenOpen ||
                                            InformationUI.Instance.IsScreenOpen;

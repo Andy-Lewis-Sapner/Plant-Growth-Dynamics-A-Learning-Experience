@@ -26,7 +26,7 @@ public static class EncryptionHelper {
         aes.Key = key;
         aes.GenerateIV();
         byte[] iv = aes.IV;
-        
+
         using ICryptoTransform encryptor = aes.CreateEncryptor();
         byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
         byte[] encryptedBytes = encryptor.TransformFinalBlock(plainBytes, 0, plainBytes.Length);

@@ -49,7 +49,7 @@ public class FertilizerJerrycan : SuperBehaviour, IUpdateObserver {
     /// Represents the particle system effect for applying fertilizer.
     /// </summary>
     [SerializeField] private ParticleSystem fertilizerEffect;
-    
+
     /// <summary>
     /// Represents the audio source for the fertilizer application sound.
     /// </summary>
@@ -143,25 +143,23 @@ public class FertilizerJerrycan : SuperBehaviour, IUpdateObserver {
         float tiltAngle = Vector3.Angle(Vector3.up, transform.up);
         bool canApply = _isCapOpen && !_isApplying && tiltAngle is >= PourAngleMin and <= PourAngleMax && Fertilizer &&
                         _fertilizerAmount > 0;
-        if (canApply) 
-            StartPouring();
+        if (canApply) StartPouring();
         ReduceFertilizerAmount();
     }
 
     /// Reduces the amount of fertilizer based on time and updates related UI and inventory.
     private void ReduceFertilizerAmount() {
         if (!_isApplying) return;
-        
+
         _timeApplying += Time.deltaTime;
         if (!(_timeApplying >= ReducingDuration)) return;
-        
+
         _timeApplying -= ReducingDuration;
         _fertilizerAmount -= ReducingAmount;
         InventoryManager.Instance.UseFertilizer(Fertilizer);
         GuidePanelUI.Instance.SetFertilizerTypeAndAmount(Fertilizer, _fertilizerAmount);
 
-        if (_fertilizerAmount <= 0)
-            StopPouring();
+        if (_fertilizerAmount <= 0) StopPouring();
     }
 
     /// Activates the jerrycan for use on the specified plantable area and initializes relevant parameters.
@@ -175,9 +173,9 @@ public class FertilizerJerrycan : SuperBehaviour, IUpdateObserver {
             Environment.House => 0.35f,
             _ => 1f
         };
-        
+
         SetSideCamera(modifier);
-        
+
         _isActive = true;
         gameObject.SetActive(true);
 
@@ -185,7 +183,7 @@ public class FertilizerJerrycan : SuperBehaviour, IUpdateObserver {
         _fertilizerAmount = 0;
         GuidePanelUI.Instance.SetFertilizerTypeAndAmount(Fertilizer, _fertilizerAmount);
         UpdateFertilizerColor();
-        
+
         Player.Instance.DisableMovement = true;
         UIManager.Instance.ActivityState = true;
         MouseMovement.Instance.UpdateCursorSettings(true);
@@ -204,7 +202,8 @@ public class FertilizerJerrycan : SuperBehaviour, IUpdateObserver {
             _isCapOpen = false;
         } else {
             capObject.transform
-                .DOLocalRotate(new Vector3(_originalCapRotation.x, _originalCapRotation.y, _originalCapRotation.z + 180f),
+                .DOLocalRotate(
+                    new Vector3(_originalCapRotation.x, _originalCapRotation.y, _originalCapRotation.z + 180f),
                     0.5f).SetEase(Ease.OutQuad);
             capObject.transform
                 .DOLocalMove(
@@ -308,7 +307,7 @@ public class FertilizerJerrycan : SuperBehaviour, IUpdateObserver {
 
         float cameraSideOffset = modifier * CameraSideOffset;
         float cameraHeight = modifier * CameraHeight;
-        
+
         float absX = Mathf.Abs(relativePosition.x);
         float absZ = Mathf.Abs(relativePosition.z);
 

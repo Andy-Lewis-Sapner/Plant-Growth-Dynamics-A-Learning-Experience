@@ -5,19 +5,17 @@ using UnityEngine.UI;
 /// Extends ToggleSwitch to change colors of background and handle images during toggle animation.
 /// </summary>
 public class ToggleSwitchColorChange : ToggleSwitch {
-    [Header("Elements to Recolor")]
-    [SerializeField] private Image backgroundImage; // Background image to recolor
+    [Header("Elements to Recolor")] [SerializeField]
+    private Image backgroundImage; // Background image to recolor
+
     [SerializeField] private Image handleImage; // Handle image to recolor
 
-    [Space] 
-    [SerializeField] private bool recolorBackground; // Enable background recoloring
+    [Space] [SerializeField] private bool recolorBackground; // Enable background recoloring
     [SerializeField] private bool recolorHandle; // Enable handle recoloring
-    
-    [Header("Colors")]
-    [SerializeField] private Color backgroundColorOff = Color.white; // Background color when off
+
+    [Header("Colors")] [SerializeField] private Color backgroundColorOff = Color.white; // Background color when off
     [SerializeField] private Color backgroundColorOn = Color.white; // Background color when on
-    [Space]
-    [SerializeField] private Color handleColorOff = Color.red; // Handle color when off
+    [Space] [SerializeField] private Color handleColorOff = Color.red; // Handle color when off
     [SerializeField] private Color handleColorOn = Color.green; // Handle color when on
 
     private bool _isBackgroundImageNotNull; // Tracks if background image is assigned

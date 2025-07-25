@@ -15,5 +15,5 @@ public static class ListExtensions {
     public static void AddWithLimit<T>(this List<T> list, T item, int maxCount, bool allowDuplicates = true) {
         if (!allowDuplicates && list.Contains(item)) return;
         if (list.Count < maxCount) list.Add(item);
-    } 
+    }
 }

@@ -38,7 +38,10 @@ public class MonsteraDiseaseSystem : PlantDiseaseSystem {
     /// Represents the types of diseases that a plant can experience within the system.
     /// </summary>
     private new enum Disease : byte {
-        None, RootRot, SpiderMites, Mealybugs
+        None,
+        RootRot,
+        SpiderMites,
+        Mealybugs
     }
 
     /// <summary>
@@ -76,17 +79,17 @@ public class MonsteraDiseaseSystem : PlantDiseaseSystem {
         if (moisture > RootRotMoistureThreshold && Random.value < 0.05f) {
             CurrentDisease = Disease.RootRot;
             DiseaseProgress = 0f;
-        }
-        else switch (humidity) {
-            case < SpiderMitesHumidityThreshold when Random.value < 0.04f:
-                CurrentDisease = Disease.SpiderMites;
-                DiseaseProgress = 0f;
-                break;
-            case < MealybugsHumidityThreshold when Random.value < 0.03f:
-                CurrentDisease = Disease.Mealybugs;
-                DiseaseProgress = 0f;
-                break;
-        }
+        } else
+            switch (humidity) {
+                case < SpiderMitesHumidityThreshold when Random.value < 0.04f:
+                    CurrentDisease = Disease.SpiderMites;
+                    DiseaseProgress = 0f;
+                    break;
+                case < MealybugsHumidityThreshold when Random.value < 0.03f:
+                    CurrentDisease = Disease.Mealybugs;
+                    DiseaseProgress = 0f;
+                    break;
+            }
     }
 
     /// Updates the progress of the current disease based on environmental factors
@@ -217,7 +220,7 @@ public class MonsteraDiseaseSystem : PlantDiseaseSystem {
             LastDiseaseCheck = DateTimeOffset.UtcNow;
         }
     }
-    
+
     /// <summary>
     /// Retrieves the names of all diseases.
     /// </summary>

@@ -53,8 +53,7 @@ public class LightVisibility : SuperBehaviour, IUpdateObserver {
         bool isVisible = distanceSqr <= MaxDistanceFromCameraSqr;
         bool shouldEnable = isVisible && _shouldBeTurnedOn;
 
-        if (_lightComponent.enabled != shouldEnable) 
-            _lightComponent.enabled = shouldEnable;
+        if (_lightComponent.enabled != shouldEnable) _lightComponent.enabled = shouldEnable;
     }
 
     /// <summary>

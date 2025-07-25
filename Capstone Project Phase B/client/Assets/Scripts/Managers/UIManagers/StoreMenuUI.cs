@@ -9,24 +9,27 @@ using UnityEngine.UI;
 // Manages the store menu UI where players can buy tools, seeds, and fertilizers
 public class StoreMenuUI : UIScreen<StoreMenuUI> {
     private readonly Dictionary<PlantSO, int> _seedQuantities = new(); // Stores selected seed quantities
-    private readonly Dictionary<FertilizerSO, int> _fertilizerQuantities = new(); // Stores selected fertilizer quantities
+
+    private readonly Dictionary<FertilizerSO, int>
+        _fertilizerQuantities = new(); // Stores selected fertilizer quantities
 
     [SerializeField] private TextMeshProUGUI pointsText; // Displays current player points
 
-    [Header("Tabs")]
-    [SerializeField] private CanvasGroup toolsTab; // Tools section
+    [Header("Tabs")] [SerializeField] private CanvasGroup toolsTab; // Tools section
     [SerializeField] private CanvasGroup seedsTab; // Seeds section
     [SerializeField] private CanvasGroup fertilizersTab; // Fertilizers section
 
-    [Header("Tools Tab")] 
-    [SerializeField] private List<ToolButtonGroup> toolButtonGroups; // All tool buttons available in the store
+    [Header("Tools Tab")] [SerializeField]
+    private List<ToolButtonGroup> toolButtonGroups; // All tool buttons available in the store
 
-    [Header("Seeds Tab")] 
-    [SerializeField] private List<SeedQuantityGroup> seedQuantityGroups; // Seed groups with price and quantity input
+    [Header("Seeds Tab")] [SerializeField]
+    private List<SeedQuantityGroup> seedQuantityGroups; // Seed groups with price and quantity input
+
     [SerializeField] private TextMeshProUGUI seedsTotalCostText; // Displays total cost for selected seeds
 
-    [Header("Fertilizers Tab")]
-    [SerializeField] private List<FertilizerQuantityGroup> fertilizerQuantityGroups; // Fertilizer groups
+    [Header("Fertilizers Tab")] [SerializeField]
+    private List<FertilizerQuantityGroup> fertilizerQuantityGroups; // Fertilizer groups
+
     [SerializeField] private TextMeshProUGUI fertilizersTotalCostText; // Displays total cost for selected fertilizers
 
     private CanvasGroup _activeTabCanvasGroup; // Tracks which tab is currently active
@@ -57,18 +60,17 @@ public class StoreMenuUI : UIScreen<StoreMenuUI> {
 
     // Sets up tool buttons with listeners and disables buttons for owned tools
     public void InitializeToolsTab() {
-        foreach (ToolButtonGroup toolButtonGroup in toolButtonGroups) 
+        foreach (ToolButtonGroup toolButtonGroup in toolButtonGroups)
             if (InventoryManager.Instance.PlayerAvailableTools.Contains(toolButtonGroup.playerItem))
                 toolButtonGroup.buyButton.interactable = false;
-            else 
+            else
                 toolButtonGroup.buyButton.onClick.AddListener(() => PurchaseTool(toolButtonGroup));
     }
 
     // Purchases a tool if the player has enough points and doesn't already own it
     private static void PurchaseTool(ToolButtonGroup toolButtonGroup) {
         if (InventoryManager.Instance.PlayerAvailableTools.Contains(toolButtonGroup.playerItem)) {
-            if (toolButtonGroup.buyButton.interactable)
-                toolButtonGroup.buyButton.interactable = false;
+            if (toolButtonGroup.buyButton.interactable) toolButtonGroup.buyButton.interactable = false;
             return;
         }
 
@@ -81,7 +83,7 @@ public class StoreMenuUI : UIScreen<StoreMenuUI> {
 
     // Adds listeners to seed quantity pickers
     private void InitializeSeedsTab() {
-        foreach (SeedQuantityGroup seedQuantityGroup in seedQuantityGroups) 
+        foreach (SeedQuantityGroup seedQuantityGroup in seedQuantityGroups)
             seedQuantityGroup.quantityPicker.OnQuantityChanged += RecalculateTotalSeedsAmount;
     }
 

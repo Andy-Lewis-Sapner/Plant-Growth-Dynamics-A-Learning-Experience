@@ -21,7 +21,7 @@ public class DayNightWeatherSystem : Singleton<DayNightWeatherSystem> {
     public static void SetLocation(float latitude, float longitude) {
         EnviroManager.instance.Time.Settings.latitude = latitude;
         EnviroManager.instance.Time.Settings.longitude = longitude;
-        
+
         TimeSpan utcOffset = TimeZoneInfo.Local.GetUtcOffset(TimeManager.Instance.CurrentTime);
         EnviroManager.instance.Time.Settings.utcOffset = utcOffset.Hours;
     }
@@ -32,7 +32,7 @@ public class DayNightWeatherSystem : Singleton<DayNightWeatherSystem> {
     /// <param name="time">The DateTime object representing the desired time and date.</param>
     public static void SetTime(DateTime time) {
         EnviroManager.instance.Time.SetDateTime(time.Second, time.Minute, time.Hour, time.Day, time.Month, time.Year);
-        
+
         EnviroEnvironment.Seasons season = time.Month switch {
             12 or 1 or 2 => EnviroEnvironment.Seasons.Winter,
             3 or 4 or 5 => EnviroEnvironment.Seasons.Spring,
@@ -40,7 +40,7 @@ public class DayNightWeatherSystem : Singleton<DayNightWeatherSystem> {
             9 or 10 or 11 => EnviroEnvironment.Seasons.Autumn,
             _ => EnviroEnvironment.Seasons.Summer
         };
-        
+
         if (EnviroManager.instance.Environment.Settings.season != season)
             EnviroManager.instance.Environment.ChangeSeason(season);
     }
@@ -55,9 +55,9 @@ public class DayNightWeatherSystem : Singleton<DayNightWeatherSystem> {
         if (Constants.WeatherCodeToWeatherType.TryGetValue(weatherCode, out string weatherType) &&
             EnviroManager.instance.Weather.targetWeatherType.ToString() != weatherType)
             EnviroManager.instance.Weather.ChangeWeather(weatherType);
-        
+
         if (!IsWeatherSet) IsWeatherSet = true;
-        
+
         if (!Mathf.Approximately(EnviroManager.instance.Environment.Settings.temperature, temperature))
             EnviroManager.instance.Environment.Settings.temperature = temperature;
     }

@@ -42,7 +42,9 @@ public class GreenHouseEnvironment : Singleton<GreenHouseEnvironment>, IEnvironm
         }
     }
 
-    [SerializeField] private List<IrrigationSystem> irrigationSystems; // List of all irrigation systems in the greenhouse
+    [SerializeField]
+    private List<IrrigationSystem> irrigationSystems; // List of all irrigation systems in the greenhouse
+
     [SerializeField] private List<FanRotation> fanRotations; // List of all fans in the greenhouse
 
     private bool _areLightsOn; // Internal light state
@@ -67,8 +69,7 @@ public class GreenHouseEnvironment : Singleton<GreenHouseEnvironment>, IEnvironm
         if (rotate == AreFansOn) return;
         AreFansOn = rotate;
 
-        foreach (FanRotation fanRotation in fanRotations)
-            fanRotation.RotateFan = rotate;
+        foreach (FanRotation fanRotation in fanRotations) fanRotation.RotateFan = rotate;
     }
 
     // Turns greenhouse lighting on or off

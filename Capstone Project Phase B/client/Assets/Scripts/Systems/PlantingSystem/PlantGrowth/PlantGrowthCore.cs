@@ -121,7 +121,7 @@ public class PlantGrowthCore : SuperBehaviour {
     /// </param>
     public void ChangePlantScale(float growthRate) {
         if (!_plantInstance.IsPlanted) return;
-        
+
         PlantLocationDetails details = _plantEnvironment.GetLocationDetails();
         double maxScale = details?.maxScale.x ?? MaxScale;
 
@@ -133,14 +133,15 @@ public class PlantGrowthCore : SuperBehaviour {
             QuestManager.Instance.TrackGrowMaxScale();
             return;
         }
-        
+
         float scaleDifference = transform.localScale.x - (float)CurrentScale;
         float playerDistance = (transform.position - Player.Instance.PlayerPosition).sqrMagnitude;
 
         if (scaleDifference < ScaleUpdateThreshold * ScaleUpdateThreshold || playerDistance > FullUpdateDistanceSqr)
             return;
         transform.DOKill();
-        transform.DOScale((float)CurrentScale * Vector3.one, GrowthAnimationDuration).SetEase(Ease.OutQuad).SetUpdate(UpdateType.Fixed);
+        transform.DOScale((float)CurrentScale * Vector3.one, GrowthAnimationDuration).SetEase(Ease.OutQuad)
+            .SetUpdate(UpdateType.Fixed);
     }
 
     /// <summary>

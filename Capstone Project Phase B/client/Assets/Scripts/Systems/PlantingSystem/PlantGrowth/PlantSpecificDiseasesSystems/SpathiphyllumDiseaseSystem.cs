@@ -41,7 +41,10 @@ public class SpathiphyllumDiseaseSystem : PlantDiseaseSystem {
     /// and not affected by any conditions such as Root Rot, Leaf Burn, or Spider Mites.
     /// </summary>
     private new enum Disease : byte {
-        None, RootRot, LeafBurn, SpiderMites
+        None,
+        RootRot,
+        LeafBurn,
+        SpiderMites
     }
 
     /// <summary>
@@ -84,9 +87,8 @@ public class SpathiphyllumDiseaseSystem : PlantDiseaseSystem {
         if (moisture > RootRotMoistureThreshold && Random.value < 0.05f) {
             CurrentDisease = Disease.RootRot;
             DiseaseProgress = 0f;
-        }
-        else if (lightLevel > LeafBurnLightThreshold && Random.value < 0.03f &&
-                 PlantEnvironment.Environment == Environment.Ground) {
+        } else if (lightLevel > LeafBurnLightThreshold && Random.value < 0.03f &&
+                   PlantEnvironment.Environment == Environment.Ground) {
             CurrentDisease = Disease.LeafBurn;
             DiseaseProgress = 0f;
         } else if (humidity < SpiderMitesHumidityThreshold && Random.value < 0.04f) {
@@ -223,7 +225,7 @@ public class SpathiphyllumDiseaseSystem : PlantDiseaseSystem {
             LastDiseaseCheck = DateTimeOffset.UtcNow;
         }
     }
-    
+
     /// <summary>
     /// Retrieves the names of all diseases.
     /// </summary>

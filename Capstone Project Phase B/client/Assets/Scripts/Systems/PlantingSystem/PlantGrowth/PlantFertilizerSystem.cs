@@ -144,7 +144,7 @@ public class PlantFertilizerSystem : SuperBehaviour {
                     : _plantGrowth.PlantSo.fertilizerGrowthBoost * 0.8f
                 : 1f;
         }
-        
+
         OnNutrientLevelChanged?.Invoke(this, NutrientLevel);
     }
 

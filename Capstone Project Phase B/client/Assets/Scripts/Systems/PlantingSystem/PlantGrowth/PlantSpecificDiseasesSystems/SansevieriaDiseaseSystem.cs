@@ -35,7 +35,10 @@ public class SansevieriaDiseaseSystem : PlantDiseaseSystem {
     /// Represents the types of diseases that can affect a Sansevieria plant within the Sansevieria Disease System.
     /// </summary>
     private new enum Disease : byte {
-        None, RootRot, LeafSpot, Mealybugs
+        None,
+        RootRot,
+        LeafSpot,
+        Mealybugs
     }
 
     /// <summary>
@@ -77,17 +80,17 @@ public class SansevieriaDiseaseSystem : PlantDiseaseSystem {
         if (humidity > MealybugsHumidityThreshold && temperature > 25f && Random.value < 0.02f) {
             CurrentDisease = Disease.Mealybugs;
             DiseaseProgress = 0f;
-        }
-        else switch (moisture) {
-            case > RootRotMoistureThreshold when Random.value < 0.06f:
-                CurrentDisease = Disease.RootRot;
-                DiseaseProgress = 0f;
-                break;
-            case > LeafSpotMoistureThreshold when humidity > 50f && Random.value < 0.03f:
-                CurrentDisease = Disease.LeafSpot;
-                DiseaseProgress = 0f;
-                break;
-        }
+        } else
+            switch (moisture) {
+                case > RootRotMoistureThreshold when Random.value < 0.06f:
+                    CurrentDisease = Disease.RootRot;
+                    DiseaseProgress = 0f;
+                    break;
+                case > LeafSpotMoistureThreshold when humidity > 50f && Random.value < 0.03f:
+                    CurrentDisease = Disease.LeafSpot;
+                    DiseaseProgress = 0f;
+                    break;
+            }
     }
 
     /// Updates the progress of the current disease affecting the plant based on environmental factors and thresholds.
@@ -223,7 +226,7 @@ public class SansevieriaDiseaseSystem : PlantDiseaseSystem {
             LastDiseaseCheck = DateTimeOffset.UtcNow;
         }
     }
-    
+
     /// <summary>
     /// Retrieves the names of all diseases.
     /// </summary>

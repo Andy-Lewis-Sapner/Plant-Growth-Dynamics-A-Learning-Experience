@@ -65,9 +65,8 @@ public class MouseMovement : Singleton<MouseMovement>, IUpdateObserver {
     private void Start() {
         if (Camera.main) _mainCameraTransform = Camera.main.transform;
         _isGameScene = SceneManager.GetActiveScene().name == nameof(Scenes.GameScene);
-        
-        if (_isGameScene)
-            UIManager.Instance.OnUIUsageChanged += UIManagerOnUIUsageChanged;
+
+        if (_isGameScene) UIManager.Instance.OnUIUsageChanged += UIManagerOnUIUsageChanged;
         UpdateCursorSettings(false);
     }
 
@@ -141,7 +140,6 @@ public class MouseMovement : Singleton<MouseMovement>, IUpdateObserver {
     /// dangling references when switching scenes or on application quit.
     /// </summary>
     private void OnDestroy() {
-        if (_isGameScene) 
-            UIManager.Instance.OnUIUsageChanged -= UIManagerOnUIUsageChanged;
+        if (_isGameScene) UIManager.Instance.OnUIUsageChanged -= UIManagerOnUIUsageChanged;
     }
 }

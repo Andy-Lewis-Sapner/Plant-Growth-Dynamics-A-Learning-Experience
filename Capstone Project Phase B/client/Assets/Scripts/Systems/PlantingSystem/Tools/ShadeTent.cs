@@ -8,11 +8,11 @@ using UnityEngine;
 public class ShadeTent : SuperBehaviour, IUpdateObserver {
     private const float ScaleDuration = 0.5f; // Duration for scaling animation
     private const float TimeToCurePlant = 7200f; // Time to cure a diseased plant
-    
+
     private Vector3 _fullScale; // Full scale of the tent
     private MeshCollider _meshCollider; // Collider for the tent
     private PlantableArea _plantableArea; // Associated plantable area
-    
+
     private bool _isOpen; // Tracks if the tent is open
     public float TimeOpened { get; private set; } // Time the tent has been open
 
@@ -31,7 +31,7 @@ public class ShadeTent : SuperBehaviour, IUpdateObserver {
         _fullScale = transform.localScale;
         transform.localScale = Vector3.zero;
     }
-    
+
     /// <summary>
     /// Toggles the tent open/closed, animates scaling, and manages update registration.
     /// </summary>
@@ -40,12 +40,12 @@ public class ShadeTent : SuperBehaviour, IUpdateObserver {
         _isOpen = !_isOpen;
         _meshCollider.enabled = _isOpen;
         _plantableArea = area;
-        
+
         transform.DOKill();
-        if (_isOpen) 
+        if (_isOpen)
             transform.DOScale(_fullScale, ScaleDuration).SetEase(Ease.OutBack)
                 .OnComplete(() => UpdateManager.RegisterObserver(this));
-        else 
+        else
             transform.DOScale(Vector3.zero, ScaleDuration).SetEase(Ease.InBack)
                 .OnComplete(() => UpdateManager.UnregisterObserver(this));
     }
@@ -55,7 +55,7 @@ public class ShadeTent : SuperBehaviour, IUpdateObserver {
     /// </summary>
     public void ObservedUpdate() {
         if (!_plantableArea.IsPlantDiseased) return;
-        
+
         TimeOpened += Time.deltaTime;
         if (TimeOpened < TimeToCurePlant) return;
         _plantableArea.ApplyCure(PlayerItem.ShadeTent);

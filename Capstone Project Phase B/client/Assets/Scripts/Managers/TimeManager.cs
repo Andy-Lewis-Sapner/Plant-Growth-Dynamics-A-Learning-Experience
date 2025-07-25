@@ -78,10 +78,10 @@ public class TimeManager : Singleton<TimeManager> {
         CurrentTime = DateTime.Now;
         DayNightWeatherSystem.SetTime(CurrentTime);
         InvokeEventsBasedOnChanges();
-        
+
         int currentSecond = CurrentTime.Second;
         if (currentSecond == _lastSecond) return;
-        
+
         timeText.text = CurrentTime.ToString("HH:mm:ss");
         _lastSecond = currentSecond;
     }
@@ -90,15 +90,13 @@ public class TimeManager : Singleton<TimeManager> {
     /// Checks for changes in the current time and invokes relevant events.
     /// </summary>
     private void InvokeEventsBasedOnChanges() {
-        if (CurrentTime.Date != _previousTime.Date)
-            OnDayChanged?.Invoke(this, EventArgs.Empty);
-        
+        if (CurrentTime.Date != _previousTime.Date) OnDayChanged?.Invoke(this, EventArgs.Empty);
+
         int currentHour = CurrentTime.Hour;
-        if (currentHour != _previousHour)
-            OnHourChanged?.Invoke(this, EventArgs.Empty);
-        
+        if (currentHour != _previousHour) OnHourChanged?.Invoke(this, EventArgs.Empty);
+
         _previousTime = CurrentTime;
         _previousHour = CurrentTime.Hour;
     }
-    
+
 }

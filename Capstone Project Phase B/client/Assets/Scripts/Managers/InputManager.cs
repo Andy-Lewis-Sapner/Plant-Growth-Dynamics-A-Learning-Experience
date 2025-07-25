@@ -104,7 +104,7 @@ public class InputManager : Singleton<InputManager> {
     protected override void AfterAwake() {
         _inputSystemActions = new InputSystem_Actions();
         _inputSystemActions.Enable();
-        
+
         SetInputSystemActions();
     }
 
@@ -114,16 +114,16 @@ public class InputManager : Singleton<InputManager> {
     private void SetInputSystemActions() {
         _inputSystemActions.Player.Move.performed += context => MoveInput = context.ReadValue<Vector2>();
         _inputSystemActions.Player.Move.canceled += _ => MoveInput = Vector2.zero;
-        
+
         _inputSystemActions.Player.Look.performed += context => LookInput = context.ReadValue<Vector2>();
         _inputSystemActions.Player.Look.canceled += _ => LookInput = Vector2.zero;
-        
+
         _inputSystemActions.UI.EscapeToUI.performed += _ => EscapeToUI = true;
         _inputSystemActions.UI.EscapeToUI.canceled += _ => EscapeToUI = false;
 
         _inputSystemActions.Player.Jump.performed += _ => JumpPressed = true;
         _inputSystemActions.Player.Jump.canceled += _ => JumpPressed = false;
-        
+
         _inputSystemActions.Player.Scroll.performed += context => ScrollInput = context.ReadValue<Vector2>();
         _inputSystemActions.Player.Scroll.canceled += _ => ScrollInput = Vector2.zero;
 

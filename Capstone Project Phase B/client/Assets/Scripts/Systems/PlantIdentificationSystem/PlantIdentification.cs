@@ -43,8 +43,7 @@ public class PlantIdentification : Singleton<PlantIdentification> {
         _worker = WorkerFactory.CreateWorker(WorkerFactory.Type.Auto, model);
 
         _labels = new List<string>(_rawLabels.Count);
-        foreach (string rawLabel in _rawLabels) 
-            _labels.Add(rawLabel.SeparateCamelCase());
+        foreach (string rawLabel in _rawLabels) _labels.Add(rawLabel.SeparateCamelCase());
     }
 
     /// Classifies an image using a pre-trained ONNX model.
